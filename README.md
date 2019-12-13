@@ -1,6 +1,6 @@
 # reborn67-github
 
-> Reborn67's Github by Vue
+> ReBorn67's Github by Vue
 
 ## Build Setup
 
