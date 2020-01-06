@@ -9,7 +9,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../assets'),
     assetsSubDirectory: 'assets',
-    assetsPublicPath: '/'
+    assetsPublicPath: '/',
 
     plugins: [
       new webpack.ProvidePlugin({
