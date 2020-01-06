@@ -1,6 +1,21 @@
 const webpack = require('webpack');
 const path = require('path');
 
+module.exports = {
+  build: {
+    // Template for index.html
+    index: path.resolve(__dirname, '../static/index.html'),
+    
+    plugins: [
+      new webpack.ProvidePlugin({
+        '$': 'jquery',
+        '_': 'lodash'
+        // ...etc.
+      })
+    ]
+  }
+}
+
 export default {
   mode: 'universal',
   /*
@@ -68,9 +83,6 @@ export default {
   ** Build configuration
   */
   build: {
-    // Template for index.html
-    index: path.resolve(__dirname, '../static/index.html'),
-
     /*
     ** You can extend webpack config here
     */
