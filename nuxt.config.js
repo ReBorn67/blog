@@ -68,6 +68,9 @@ export default {
   ** Build configuration
   */
   build: {
+    // Template for index.html
+    index: path.resolve(__dirname, '../static/index.html'),
+
     /*
     ** You can extend webpack config here
     */
