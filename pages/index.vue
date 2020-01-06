@@ -1,72 +1,43 @@
 <template>
-  <div class="container">
     <div>
-      <logo />
-      <h1 class="title">
-        blog
-      </h1>
-      <h2 class="subtitle">
-        ReBorn67&#39;s blog
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+        <hero></hero>
+        <basic-elements></basic-elements>
+        <inputs></inputs>
+        <custom-controls></custom-controls>
+        <navigation></navigation>
+        <javascript-components></javascript-components>
+        <icons></icons>
+        <examples></examples>
+        <download-section></download-section>
+        <carousel></carousel>
     </div>
-  </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import Hero from "~/components/Hero";
+import BasicElements from "~/components/BasicElements";
+import Inputs from "~/components/Inputs";
+import CustomControls from "~/components/CustomControls";
+import Navigation from "~/components/Navigation";
+import JavascriptComponents from "~/components/JavascriptComponents";
+import Carousel from "~/components/Carousel";
+import Icons from "~/components/Icons";
+import Examples from "~/components/Examples";
+import DownloadSection from "~/components/DownloadSection";
 
 export default {
+  name: 'index',
   components: {
-    Logo
+    Hero,
+    BasicElements,
+    Inputs,
+    CustomControls,
+    Navigation,
+    JavascriptComponents,
+    Carousel,
+    Icons,
+    Examples,
+    DownloadSection
   }
-}
+};
 </script>
-
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>

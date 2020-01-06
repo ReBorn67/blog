@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+const path = require('path');
 
 export default {
   mode: 'universal',
@@ -19,15 +21,30 @@ export default {
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
+  configureWebpack: {
+    // Set up all the aliases we use in our app.
+    plugins: [
+      new webpack.optimize.LimitChunkCountPlugin({
+        maxChunks: 6
+      })
+    ]
+  },
+  pwa: {
+    name: 'Vue Argon Design',
+    themeColor: '#172b4d',
+    msTileColor: '#172b4d',
+    appleMobileWebAppCapable: 'yes',
+    appleMobileWebAppStatusBarStyle: '#172b4d'
+  },
   /*
   ** Global CSS
   */
-  css: [
-  ],
+  // css: [],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/argon-kit.js'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -55,6 +72,7 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+      config.resolve.alias['~npm'] = '~/node_modules';
     }
   }
 }
