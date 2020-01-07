@@ -4,14 +4,14 @@
             <div class="row">
                 <div class="col-md-6 mb-5 mb-md-0">
                     <div class="card card-lift--hover shadow border-0">
-                        <router-link to="/landing" title="Landing Page">
+                        <router-link :to="HOME_PATH+'landing'" title="Landing Page">
                             <img :src="HOME_PATH+'img/theme/landing.jpg'" class="card-img">
                         </router-link>
                     </div>
                 </div>
                 <div class="col-md-6 mb-5 mb-lg-0">
                     <div class="card card-lift--hover shadow border-0">
-                        <router-link to="/profile" title="Profile Page">
+                        <router-link :to="HOME_PATH+'profile'" title="Profile Page">
                             <img :src="HOME_PATH+'img/theme/profile.jpg'" class="card-img">
                         </router-link>
                     </div>
