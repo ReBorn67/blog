@@ -38,9 +38,8 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: process.env.HOME_PATH+'favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' },
-      // { rel: 'stylesheet', type: 'text/css', href: '/fonts/CookieRun/cookierun-webfont.css' },
+      { rel: 'icon', type: 'image/x-icon', href: ((process.env.NODE_ENV == 'development') ? '/' : '/blog/') + 'favicon.ico' },
+      { rel: 'stylesheet', type: 'text/css', href: '/fonts/CookieRun/cookierun-webfont.css' },
     ]
   },
   // base: '/blog/',
