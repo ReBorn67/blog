@@ -1,10 +1,6 @@
 <template>
     <div>
         <hero></hero>
-
-        <base-button size="lg" type="primary" @click="doAlert">Primary</base-button>
-        <base-button size="lg" type="primary" @click="doAlert">Primary</base-button>
-
         <basic-elements></basic-elements>
         <inputs></inputs>
         <custom-controls></custom-controls>
@@ -44,17 +40,6 @@ export default {
         Icons,
         Examples,
         DownloadSection
-    },
-    methods: {
-        doAlert () {
-            // alert(process.env.HOME_PATH);
-            // alert(process.env.NODE_ENV);
-        }
-    },
-    mounted () {
-        console.log(HOME_PATH);
-        console.log(process);
-        console.log(process.env);
     }
 };
 </script>
