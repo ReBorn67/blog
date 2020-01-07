@@ -1,6 +1,14 @@
 const webpack = require('webpack');
 const path = require('path');
 
+var baseUrl = '';
+
+if (process.env.NODE_ENV === 'production') {
+  baseUrl = '/blog/';
+} else {
+  baseUrl = '/';
+}
+
 module.exports = {
   build: {
     // Template for index.html
@@ -10,10 +18,10 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '',
-    
-    mode: 'spa',
+
+    mode: 'universal',
     router: {
-      base: '/blog/'
+      // base: '/blog/'
     },
     plugins: [
       new webpack.ProvidePlugin({
@@ -41,10 +49,15 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  // base: '/blog/',
   /*
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
+  env: {
+    // HOME_PATH: (process.env.NODE_ENV == 'development') ? '/' : '/blog/'
+    HOME_PATH: '/'
+  },
   configureWebpack: {
     // Set up all the aliases we use in our app.
     plugins: [

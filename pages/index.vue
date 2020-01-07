@@ -26,18 +26,22 @@ import Examples from "~/components/Examples";
 import DownloadSection from "~/components/DownloadSection";
 
 export default {
-  name: 'index',
-  components: {
-    Hero,
-    BasicElements,
-    Inputs,
-    CustomControls,
-    Navigation,
-    JavascriptComponents,
-    Carousel,
-    Icons,
-    Examples,
-    DownloadSection
-  }
+    name: 'index',
+    components: {
+        Hero,
+        BasicElements,
+        Inputs,
+        CustomControls,
+        Navigation,
+        JavascriptComponents,
+        Carousel,
+        Icons,
+        Examples,
+        DownloadSection
+    },
+    methods: {
+    },
+    mounted () {
+    }
 };
 </script>

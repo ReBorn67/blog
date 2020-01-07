@@ -1,7 +1,7 @@
 <template>
     <header class="header-global">
         <base-nav class="navbar-main" transparent type="" effect="light" expand>
-            <router-link slot="brand" class="navbar-brand mr-lg-5" to="/">
+            <router-link slot="brand" class="navbar-brand mr-lg-5" :to="HOME_PATH">
                 <img src="img/brand/white.png" alt="logo">
             </router-link>
 
@@ -52,10 +52,11 @@
                         <i class="ni ni-collection d-lg-none"></i>
                         <span class="nav-link-inner--text">Examples</span>
                     </a>
-                    <router-link to="/landing" class="dropdown-item">Landing</router-link>
-                    <router-link to="/profile" class="dropdown-item">Profile</router-link>
-                    <router-link to="/login" class="dropdown-item">Login</router-link>
-                    <router-link to="/register" class="dropdown-item">Register</router-link>
+                    <router-link :to="HOME_PATH+'landing'" class="dropdown-item">Landing</router-link>
+                    <router-link :to="HOME_PATH+'profile'" class="dropdown-item">Profile</router-link>
+                    <router-link :to="HOME_PATH+'login'" class="dropdown-item">Login</router-link>
+                    <router-link :to="HOME_PATH+'register'" class="dropdown-item">Register</router-link>
+                    <router-link :to="HOME_PATH+'about'" class="dropdown-item">about</router-link>
                 </base-dropdown>
             </ul>
             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
@@ -106,11 +107,16 @@ import BaseDropdown from "~/baseComponents/BaseDropdown";
 import CloseButton from "~/baseComponents/CloseButton";
 
 export default {
-  components: {
-    BaseNav,
-    CloseButton,
-    BaseDropdown
-  }
+    components: {
+        BaseNav,
+        CloseButton,
+        BaseDropdown
+    },
+    data () {
+        return {
+            HOME_PATH: process.env.HOME_PATH
+        };
+    }
 };
 </script>
 <style>
