@@ -114,8 +114,7 @@ export default {
     },
     data () {
         return {
-            HOME_PATH: process.env.HOME_PATH,
-            HOME_URL: process.env.HOME_URL
+            HOME_PATH: process.env.HOME_PATH
         };
     }
 };

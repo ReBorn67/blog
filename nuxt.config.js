@@ -47,8 +47,7 @@ export default {
   */
   loading: { color: '#fff' },
   env: {
-    HOME_PATH: (process.env.NODE_ENV == 'development') ? '/' : '/blog/',
-    HOME_URL: process.env.BASE_URL || 'http://localhost:3000'
+    HOME_PATH: (process.env.NODE_ENV == 'development') ? '/' : '/blog/'
   },
   configureWebpack: {
     // Set up all the aliases we use in our app.
@@ -68,7 +67,11 @@ export default {
   /*
   ** Global CSS
   */
-  // css: [],
+  css: [
+    '~/assets/vendor/nucleo/css/nucleo.css',
+    '~/assets/vendor/font-awesome/css/font-awesome.min.css',
+    { src: '~/assets/scss/argon.scss', lang: 'scss' }
+  ],
   /*
   ** Plugins to load before mounting the App
   */
@@ -85,7 +88,7 @@ export default {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
+    '@nuxtjs/axios'
   ],
   /*
   ** Axios module configuration

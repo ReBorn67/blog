@@ -3,6 +3,7 @@
         <hero></hero>
 
         <base-button size="lg" type="primary" @click="doAlert">Primary</base-button>
+        <base-button size="lg" type="primary" @click="doAlert">Primary</base-button>
 
         <basic-elements></basic-elements>
         <inputs></inputs>
@@ -29,7 +30,6 @@ import Examples from "~/components/Examples";
 import DownloadSection from "~/components/DownloadSection";
 
 const HOME_PATH = process.env.HOME_PATH;
-const HOME_URL = process.env.HOME_URL;
 
 export default {
     name: 'index',
@@ -47,14 +47,12 @@ export default {
     },
     methods: {
         doAlert () {
-            alert(process.env.HOME_URL);
             // alert(process.env.HOME_PATH);
             // alert(process.env.NODE_ENV);
         }
     },
     mounted () {
         console.log(HOME_PATH);
-        console.log(HOME_URL);
         console.log(process);
         console.log(process.env);
     }
