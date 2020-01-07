@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 
+const isDev = (process.env.NODE_ENV == 'development');
+
 module.exports = {
   build: {
     // Template for index.html
@@ -38,8 +40,9 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: ((process.env.NODE_ENV == 'development') ? '/' : '/blog/') + 'favicon.ico' },
-      { rel: 'stylesheet', type: 'text/css', href: '/fonts/CookieRun/cookierun-webfont.css' },
+      { rel: 'icon', type: 'image/x-icon', href: ((isDev ? '/' : '/blog/') + 'favicon.ico') },
+      // { rel: 'icon', type: 'image/x-icon', href: ((process.env.NODE_ENV == 'development') ? '/' : '/blog/') + 'favicon.ico' },
+      { rel: 'stylesheet', type: 'text/css', href: ((isDev ? '/' : '/blog/') + 'fonts/CookieRun/cookierun-webfont.css') },
     ]
   },
   // base: '/blog/',
@@ -48,7 +51,7 @@ export default {
   */
   loading: { color: '#fff' },
   env: {
-    HOME_PATH: (process.env.NODE_ENV == 'development') ? '/' : '/blog/'
+    HOME_PATH: isDev ? '/' : '/blog/'
   },
   configureWebpack: {
     // Set up all the aliases we use in our app.

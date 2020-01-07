@@ -1,16 +1,6 @@
-/*@font-face { 
-  font-family: 'CookieRun-Black'; 
-  src: url('/fonts/CookieRun/CookieRun-Black.woff') format('woff');
-}
-
-@font-face { 
-  font-family: 'CookieRun-Bold'; 
-  src: url('/fonts/CookieRun/CookieRun-Bold.woff') format('woff');
-}*/
-
 @font-face { 
   font-family: 'CookieRun-Regular'; 
-  src: url('/fonts/CookieRun/CookieRun-Regular.woff') format('woff');
+  src: url('./CookieRun-Regular.woff') format('woff');
 }
 
 * {
