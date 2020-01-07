@@ -40,9 +40,9 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: ((isDev ? '/' : '/blog/') + 'favicon.ico') },
+      { rel: 'icon', type: 'image/x-icon', href: (isDev ? '/favicon.ico' : '/blog/favicon.ico') },
       // { rel: 'icon', type: 'image/x-icon', href: ((process.env.NODE_ENV == 'development') ? '/' : '/blog/') + 'favicon.ico' },
-      { rel: 'stylesheet', type: 'text/css', href: ((isDev ? '/' : '/blog/') + 'fonts/CookieRun/cookierun-webfont.css') },
+      { rel: 'stylesheet', type: 'text/css', href: ((isDev ? '/fonts/CookieRun/cookierun-webfont.css' : '/blog/fonts/CookieRun/cookierun-webfont.css')) },
     ]
   },
   // base: '/blog/',
