@@ -3,7 +3,6 @@
         <hero></hero>
 
         <base-button size="lg" type="primary" @click="doAlert">Primary</base-button>
-        <base-button size="lg" type="primary" @click="doAlert">Primary</base-button>
 
         <basic-elements></basic-elements>
         <inputs></inputs>
