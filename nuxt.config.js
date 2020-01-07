@@ -1,14 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 
-var baseUrl = '';
-
-if (process.env.NODE_ENV === 'production') {
-  baseUrl = '/blog/';
-} else {
-  baseUrl = '/';
-}
-
 module.exports = {
   build: {
     // Template for index.html
