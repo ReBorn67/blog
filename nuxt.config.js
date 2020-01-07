@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 const isDev = (process.env.NODE_ENV == 'development');
+const base_path = isDev ? '/' : '/blog/';
 
 module.exports = {
   build: {
@@ -40,11 +41,11 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: (isDev ? '/' : '/blog/') + 'favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: base_path + 'favicon.ico' },
       // { rel: 'icon', type: 'image/x-icon', href: ((process.env.NODE_ENV == 'development') ? '/' : '/blog/') + 'favicon.ico' },
-      { rel: 'stylesheet', type: 'text/css', href: (isDev ? '/' : '/blog/') + 'vendor/nucleo/css/nucleo.css' },
-      { rel: 'stylesheet', type: 'text/css', href: (isDev ? '/' : '/blog/') + 'font-awesome/css/font-awesome.css' },
-      { rel: 'stylesheet', type: 'text/css', href: (isDev ? '/' : '/blog/') + 'cookie-run/css/cookierun-webfont.css' },
+      { rel: 'stylesheet', type: 'text/css', href: base_path + 'vendor/nucleo/css/nucleo.css' },
+      { rel: 'stylesheet', type: 'text/css', href: base_path + 'vendor/font-awesome/css/font-awesome.css' },
+      { rel: 'stylesheet', type: 'text/css', href: base_path + 'vendor/cookie-run/css/cookierun-webfont.css' },
     ]
   },
   // base: '/blog/',
@@ -53,7 +54,7 @@ export default {
   */
   loading: { color: '#fff' },
   env: {
-    HOME_PATH: isDev ? '/' : '/blog/'
+    HOME_PATH: base_path
   },
   configureWebpack: {
     // Set up all the aliases we use in our app.
