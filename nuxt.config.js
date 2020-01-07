@@ -55,7 +55,8 @@ export default {
   */
   loading: { color: '#fff' },
   env: {
-    HOME_PATH: (process.env.NODE_ENV == 'development') ? '/' : '/blog/'
+    HOME_PATH: (process.env.NODE_ENV == 'development') ? '/' : '/blog/',
+    HOME_URL: process.env.BASE_URL || 'http://localhost:3000'
   },
   configureWebpack: {
     // Set up all the aliases we use in our app.
