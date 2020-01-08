@@ -38,9 +38,9 @@ module.exports = {
 export default {
   ...routerBase,
   mode: 'spa',
-  router: {
-    base: base_path
-  },
+  // router: {
+  //   base: base_path
+  // },
   /*
   ** Headers of the page
   */
