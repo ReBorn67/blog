@@ -1,3 +1,4 @@
+const jQuery = require('jQuery');
 const webpack = require('webpack');
 const path = require('path');
 
@@ -56,7 +57,10 @@ export default {
       { rel: 'stylesheet', type: 'text/css', href: (base_path + 'vendor/nucleo/css/nucleo.css') },
       { rel: 'stylesheet', type: 'text/css', href: (base_path + 'vendor/font-awesome/css/font-awesome.css') },
       { rel: 'stylesheet', type: 'text/css', href: (base_path + 'vendor/cookie-run/css/cookierun-webfont.css') },
-    ]
+    ],
+    script: [
+      { src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js' }
+    ],
   },
   base: base_path,
   /*

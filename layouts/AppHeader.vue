@@ -1,6 +1,6 @@
 <template>
-    <header class="header-global">
-        <base-nav class="navbar-main" transparent type="" effect="light" expand>
+    <header class="header-global sticky-top">
+        <base-nav id="header" class="navbar-main" transparent type="" effect="light" expand>
             <router-link slot="brand" class="navbar-brand mr-lg-5" :to="HOME_PATH">
                 <img :src="HOME_PATH+'img/brand/white.png'" alt="logo">
             </router-link>
@@ -116,6 +116,25 @@ export default {
         return {
             HOME_PATH: process.env.HOME_PATH
         };
+    },
+    methods: {
+        handleScroll (event) {
+            if (window.scrollY) {
+                $('#header').removeClass('navbar-light');
+                $('#header').addClass('navbar-dark bg-primary');
+            } else {
+                $('#header').addClass('navbar-light');
+                $('#header').removeClass('navbar-dark bg-primary');
+            }
+        }
+    },
+    created () {
+        window.addEventListener('scroll', this.handleScroll);
+    },
+    mounted () {
+    },
+    destroyed () {
+        window.removeEventListener('scroll', this.handleScroll);
     }
 };
 </script>
