@@ -9,7 +9,9 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "geneploy": "nuxt generate && gh-pages -d dist",
+    "ddd": "nuxt generate && push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
     "nuxt": "^2.0.0",
@@ -31,6 +33,7 @@
     "@vue/cli-service": "^3.4.0",
     "gh-pages": "^2.1.1",
     "node-sass": "^4.11.0",
+    "push-dir": "^0.4.1",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.6"
   }

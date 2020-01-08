@@ -4,6 +4,12 @@ const path = require('path');
 const isDev = (process.env.NODE_ENV == 'development');
 const base_path = isDev ? '/' : '/blog/';
 
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+  router: {
+    base: base_path
+  }
+} : {}
+
 module.exports = {
   build: {
     // Template for index.html
@@ -14,9 +20,9 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '',
 
-    mode: 'universal',
+    mode: 'spa',
     router: {
-      // base: '/blog/'
+      base: base_path
     },
     plugins: [
       new webpack.ProvidePlugin({
@@ -29,7 +35,11 @@ module.exports = {
 }
 
 export default {
-  mode: 'universal',
+  ...routerBase,
+  mode: 'spa',
+  router: {
+    base: base_path
+  },
   /*
   ** Headers of the page
   */
@@ -48,7 +58,7 @@ export default {
       { rel: 'stylesheet', type: 'text/css', href: (base_path + 'vendor/cookie-run/css/cookierun-webfont.css') },
     ]
   },
-  // base: '/blog/',
+  base: base_path,
   /*
   ** Customize the progress-bar color
   */
