@@ -68,7 +68,7 @@ export default {
   */
   loading: { color: '#fff' },
   env: {
-    HOME_PATH: base_path
+    HOME_PATH: ''
   },
   configureWebpack: {
     // Set up all the aliases we use in our app.
