@@ -1,7 +1,7 @@
 <template>
     <header class="header-global sticky-top">
         <base-nav id="header" class="navbar-main" transparent type="" effect="light" expand>
-            <router-link slot="brand" class="navbar-brand mr-lg-5" :to="HOME_PATH">
+            <router-link slot="brand" class="navbar-brand mr-lg-5" to="/">
                 <img :src="HOME_PATH+'img/brand/white.png'" alt="logo">
             </router-link>
 
