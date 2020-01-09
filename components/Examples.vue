@@ -21,10 +21,10 @@
                         them will give you a picture of what you can built with this powerful Bootstrap 4 Design
                         System.</p>
                     <div class="btn-wrapper">
-                        <router-link to="/login" class="btn btn-success">
+                        <router-link :to="HOME_PATH+'login'" class="btn btn-success">
                             Login Page
                         </router-link>
-                        <router-link to="/register" class="btn btn-success">
+                        <router-link :to="HOME_PATH+'register'" class="btn btn-success">
                             Register Page
                         </router-link>
                     </div>
@@ -40,12 +40,12 @@
                                 </div>
                                 <div class="btn-wrapper text-center">
                                     <base-button type="neutral">
-                                        <img slot="icon" src="/img/icons/common/github.svg">
+                                        <img slot="icon" :src="HOME_PATH+'img/icons/common/github.svg'">
                                         Github
                                     </base-button>
 
                                     <base-button type="neutral">
-                                        <img slot="icon" src="/img/icons/common/google.svg">
+                                        <img slot="icon" :src="HOME_PATH+'img/icons/common/google.svg'">
                                         Google
                                     </base-button>
                                 </div>
@@ -84,6 +84,7 @@ export default {
     name: 'examples',
     data () {
         return {
+            HOME_PATH: process.env.HOME_PATH
         };
     }
 };

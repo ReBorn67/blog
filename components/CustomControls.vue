@@ -83,7 +83,7 @@
                                 <div class="row" slot="content-header" slot-scope="{closeMenu}">
                                     <div class="col-6 collapse-brand">
                                         <a href="./index.html">
-                                            <img src="/img/brand/blue.png">
+                                            <img :src="HOME_PATH+'img/brand/blue.png'">
                                         </a>
                                     </div>
                                     <div class="col-6 collapse-close">
@@ -125,7 +125,7 @@
                                 <div class="row" slot="content-header" slot-scope="{closeMenu}">
                                     <div class="col-6 collapse-brand">
                                         <a href="./index.html">
-                                            <img src="/img/brand/blue.png">
+                                            <img :src="HOME_PATH+'img/brand/blue.png'">
                                         </a>
                                     </div>
                                     <div class="col-6 collapse-close">
@@ -184,6 +184,7 @@ export default {
   },
   data() {
     return {
+      HOME_PATH: process.env.HOME_PATH,
       checkboxes: {
         unchecked: false,
         checked: true,
