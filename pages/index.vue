@@ -25,8 +25,6 @@ import Icons from "~/components/Icons";
 import Examples from "~/components/Examples";
 import DownloadSection from "~/components/DownloadSection";
 
-const HOME_PATH = process.env.HOME_PATH;
-
 export default {
     name: 'index',
     components: {
