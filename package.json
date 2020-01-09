@@ -14,10 +14,12 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
+    "bluebird": "^3.7.2",
     "bootstrap-vue": "^2.0.4",
     "flatpickr": "^4.5.1",
     "nouislider": "^11.1.0",
     "nuxt": "^2.0.0",
+    "path": "^0.12.7",
     "register-service-worker": "^1.5.2",
     "vue": "^2.6.6",
     "vue-flatpickr-component": "^8.1.1",

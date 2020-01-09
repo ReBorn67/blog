@@ -1,4 +1,3 @@
-const jQuery = require('jQuery');
 const webpack = require('webpack');
 const path = require('path');
 
@@ -109,7 +108,7 @@ export default {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
   ],
   /*
   ** Axios module configuration
