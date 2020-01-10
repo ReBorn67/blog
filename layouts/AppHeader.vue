@@ -1,6 +1,6 @@
 <template>
-    <header class="header-global sticky-top">
-        <base-nav id="header" class="navbar-main" transparent type="" effect="light" expand>
+    <header class="header-global sticky-top bg-dark">
+        <base-nav id="header" class="navbar-main" type="" effect="dark" expand>
             <router-link slot="brand" class="navbar-brand mr-lg-5" to="/">
                 <img :src="HOME_PATH+'img/brand/white.png'" alt="logo">
             </router-link>
@@ -47,16 +47,18 @@
                         </a>
                     </div>
                 </base-dropdown>
+
                 <base-dropdown tag="li" class="nav-item">
                     <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
                         <i class="ni ni-collection d-lg-none"></i>
                         <span class="nav-link-inner--text">Examples</span>
                     </a>
-                    <router-link :to="HOME_PATH+'landing'" class="dropdown-item">Landing</router-link>
-                    <router-link :to="HOME_PATH+'profile'" class="dropdown-item">Profile</router-link>
-                    <router-link :to="HOME_PATH+'login'" class="dropdown-item">Login</router-link>
-                    <router-link :to="HOME_PATH+'register'" class="dropdown-item">Register</router-link>
-                    <router-link :to="HOME_PATH+'about'" class="dropdown-item">about</router-link>
+                    <router-link :to="HOME_PATH+'example/components'" class="dropdown-item">Components</router-link>
+                    <router-link :to="HOME_PATH+'example/landing'" class="dropdown-item">Landing</router-link>
+                    <router-link :to="HOME_PATH+'example/profile'" class="dropdown-item">Profile</router-link>
+                    <router-link :to="HOME_PATH+'example/login'" class="dropdown-item">Login</router-link>
+                    <router-link :to="HOME_PATH+'example/register'" class="dropdown-item">Register</router-link>
+                    <router-link :to="HOME_PATH+'example/about'" class="dropdown-item">about</router-link>
                 </base-dropdown>
             </ul>
             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
@@ -120,18 +122,20 @@ export default {
     methods: {
         handleScroll (event) {
             if (window.scrollY) {
-                $('#header').removeClass('navbar-light');
-                $('#header').addClass('navbar-dark bg-primary');
+                // $('#header').removeClass('navbar-light');
+                // $('#header').addClass('navbar-dark bg-primary');
+                $('#header').addClass('bg-primary');
             } else {
-                $('#header').addClass('navbar-light');
-                $('#header').removeClass('navbar-dark bg-primary');
+                // $('#header').addClass('navbar-light');
+                // $('#header').removeClass('navbar-dark bg-primary');
+                $('#header').removeClass('bg-primary');
             }
         }
     },
+    mounted () {
+    },
     created () {
         window.addEventListener('scroll', this.handleScroll);
-    },
-    mounted () {
     },
     destroyed () {
         window.removeEventListener('scroll', this.handleScroll);
