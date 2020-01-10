@@ -88,3 +88,17 @@ sw.*
 
 # Vim swap files
 *.swp
+
+/assets
+/baseComponents
+/components
+/directives
+/layouts
+/middleware
+/pages
+/plugins
+/static
+/store
+.nuxt.config.js
+package-lock.json
+package.json

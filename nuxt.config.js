@@ -9,12 +9,12 @@ const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
     base: base_path
   },
   env: {
-    HOME_PATH: ''
+    HOME_PATH: base_path
   }
 } : {
   // base: base_path,
   env: {
-    HOME_PATH: base_path
+    HOME_PATH: ''
   }
 }
 
