@@ -7,8 +7,16 @@ const base_path = isDev ? '/' : '/blog/';
 const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
   router: {
     base: base_path
+  },
+  env: {
+    HOME_PATH: ''
   }
-} : {}
+} : {
+  base: base_path,
+  env: {
+    HOME_PATH: base_path
+  }
+}
 
 module.exports = {
   build: {
@@ -37,9 +45,9 @@ module.exports = {
 export default {
   ...routerBase,
   mode: 'spa',
-  router: {
-    base: base_path
-  },
+  // router: {
+  //   base: base_path
+  // },
   /*
   ** Headers of the page
   */
@@ -61,14 +69,14 @@ export default {
       { src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js' }
     ],
   },
-  base: base_path,
+  // base: base_path,
   /*
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
-  env: {
-    HOME_PATH: ''
-  },
+  // env: {
+  //   HOME_PATH: base_path
+  // },
   configureWebpack: {
     // Set up all the aliases we use in our app.
     plugins: [

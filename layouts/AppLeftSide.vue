@@ -1,6 +1,6 @@
 <template>
-    <aside id="left-side" class="col-lg-3 d-none d-lg-block border-right border-dark" :style="{ marginTop: marginTop+'px' }">
-        <nav class="navbar-light">
+    <aside id="left-side" class="col-lg-3 d-none d-lg-block" :style="{ marginTop: marginTop+'px' }">
+        <nav class="navbar-light border-right border-dark">
           <p class="uppercase font-bold pb-6">
             버전 <span class="text-nuxt-lightgreen">0.10.7</span>
           </p> 
@@ -37,6 +37,7 @@
         </nav>
     </aside>
 </template>
+
 <script>
 import BaseNav from "~/baseComponents/BaseNav";
 import BaseDropdown from "~/baseComponents/BaseDropdown";
