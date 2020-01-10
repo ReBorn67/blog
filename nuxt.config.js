@@ -1,10 +1,10 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const isDev = (process.env.NODE_ENV == 'development');
+const isDev = (process.env.DEPLOY_ENV === 'GH_PAGES');
 const base_path = isDev ? '/' : '/blog/';
 
-const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+const routerBase = isDev ? {
   router: {
     base: base_path
   }
