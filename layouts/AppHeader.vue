@@ -49,7 +49,7 @@
                 </base-dropdown>
 
                 <base-dropdown tag="li" class="nav-item">
-                    <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button">
+                    <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button" @click="aaaa">
                         <i class="ni ni-collection d-lg-none"></i>
                         <span class="nav-link-inner--text">Examples</span>
                     </a>
@@ -120,6 +120,9 @@ export default {
         };
     },
     methods: {
+        aaaa () {
+            alert(this.HOME_PATH);
+        },
         handleScroll (event) {
             if (window.scrollY) {
                 // $('#header').removeClass('navbar-light');
