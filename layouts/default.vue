@@ -6,7 +6,7 @@
                 <div class="row ml-auto">
                     <app-left-side name="left-side"></app-left-side>
 
-                    <fade-transition class="col col-lg-9 ml-auto" origin="center" mode="out-in" :duration="250">
+                    <fade-transition class="col col-lg-9" origin="center" mode="out-in" :duration="250">
                         <div id="content"><nuxt /></div>
                     </fade-transition>
                 </div>
