@@ -21,10 +21,10 @@
                         them will give you a picture of what you can built with this powerful Bootstrap 4 Design
                         System.</p>
                     <div class="btn-wrapper">
-                        <router-link :to="HOME_PATH+'login'" class="btn btn-success">
+                        <router-link to="/login" class="btn btn-success">
                             Login Page
                         </router-link>
-                        <router-link :to="HOME_PATH+'register'" class="btn btn-success">
+                        <router-link to="/register" class="btn btn-success">
                             Register Page
                         </router-link>
                     </div>

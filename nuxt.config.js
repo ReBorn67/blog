@@ -61,13 +61,13 @@ export default {
       { src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js' }
     ],
   },
-  base: (isDev ? '' : base_path),
+  base: base_path,
   /*
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
   env: {
-    HOME_PATH: (isDev ? '/' : base_path)
+    HOME_PATH: base_path
   },
   configureWebpack: {
     // Set up all the aliases we use in our app.

@@ -55,10 +55,10 @@
                         <span class="nav-link-inner--text">Examples</span>
                     </a>
                     <div class="dropdown-menu">
-                        <router-link :to="HOME_PATH+'landing'" class="dropdown-item">Landing</router-link>
-                        <router-link :to="HOME_PATH+'profile'" class="dropdown-item">Profile</router-link>
-                        <router-link :to="HOME_PATH+'login'" class="dropdown-item">Login</router-link>
-                        <router-link :to="HOME_PATH+'register'" class="dropdown-item">Register</router-link>
+                        <router-link to="/landing" class="dropdown-item">Landing</router-link>
+                        <router-link to="/profile" class="dropdown-item">Profile</router-link>
+                        <router-link to="/login" class="dropdown-item">Login</router-link>
+                        <router-link to="/register" class="dropdown-item">Register</router-link>
                     </div>
                 </li>
             </ul>

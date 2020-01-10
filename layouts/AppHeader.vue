@@ -53,12 +53,12 @@
                         <i class="ni ni-collection d-lg-none"></i>
                         <span class="nav-link-inner--text">Examples</span>
                     </a>
-                    <router-link :to="'/example/components'" class="dropdown-item">Components</router-link>
-                    <router-link :to="'/example/landing'" class="dropdown-item">Landing</router-link>
-                    <router-link :to="'/example/profile'" class="dropdown-item">Profile</router-link>
-                    <router-link :to="'/example/login'" class="dropdown-item">Login</router-link>
-                    <router-link :to="'/example/register'" class="dropdown-item">Register</router-link>
-                    <router-link :to="'/example/about'" class="dropdown-item">about</router-link>
+                    <router-link to="/example/components" class="dropdown-item">Components</router-link>
+                    <router-link to="/example/landing" class="dropdown-item">Landing</router-link>
+                    <router-link to="/example/profile" class="dropdown-item">Profile</router-link>
+                    <router-link to="/example/login" class="dropdown-item">Login</router-link>
+                    <router-link to="/example/register" class="dropdown-item">Register</router-link>
+                    <router-link to="/example/about" class="dropdown-item">about</router-link>
                 </base-dropdown>
             </ul>
             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
