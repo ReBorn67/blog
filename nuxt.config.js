@@ -61,7 +61,7 @@ export default {
       { src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js' }
     ],
   },
-  base: base_path,
+  base: (isDev ? base_path : ''),
   /*
   ** Customize the progress-bar color
   */
