@@ -12,7 +12,7 @@ const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
     HOME_PATH: ''
   }
 } : {
-  base: base_path,
+  // base: base_path,
   env: {
     HOME_PATH: base_path
   }
@@ -69,7 +69,7 @@ export default {
       { src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js' }
     ],
   },
-  // base: base_path,
+  base: base_path,
   /*
   ** Customize the progress-bar color
   */
