@@ -99,6 +99,6 @@ sw.*
 /plugins
 /static
 /store
-nuxt.config.js
-package-lock.json
-package.json
+./nuxt.config.js
+./package-lock.json
+./package.json
