@@ -35,10 +35,17 @@ module.exports = {
 }
 
 export default {
-  // ...routerBase,
   mode: 'spa',
+  /**
+   * Route Set
+   */
+  // ...routerBase,
+  base: base_path,
   router: {
     base: base_path
+  },
+  env: {
+    HOME_PATH: base_path
   },
   /*
   ** Headers of the page
@@ -52,7 +59,6 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: (base_path + 'favicon.ico') },
-      // { rel: 'icon', type: 'image/x-icon', href: ((process.env.NODE_ENV == 'development') ? '/' : '/blog/') + 'favicon.ico' },
       { rel: 'stylesheet', type: 'text/css', href: (base_path + 'vendor/nucleo/css/nucleo.css') },
       { rel: 'stylesheet', type: 'text/css', href: (base_path + 'vendor/font-awesome/css/font-awesome.css') },
       { rel: 'stylesheet', type: 'text/css', href: (base_path + 'vendor/cookie-run/css/cookierun-webfont.css') },
@@ -61,14 +67,10 @@ export default {
       { src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js' }
     ],
   },
-  base: base_path,
   /*
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
-  env: {
-    HOME_PATH: base_path
-  },
   configureWebpack: {
     // Set up all the aliases we use in our app.
     plugins: [
@@ -88,8 +90,6 @@ export default {
   ** Global CSS
   */
   css: [
-    // '~/assets/vendor/nucleo/css/nucleo.css',
-    // '~/assets/vendor/font-awesome/css/font-awesome.css',
     { src: '~/assets/scss/argon.scss', lang: 'scss' }
   ],
   /*
