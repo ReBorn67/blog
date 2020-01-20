@@ -10,13 +10,6 @@
       </div>
 
       <div :id="'collapse_'+menu.title" class="collapse" :data-parent="'#accordion_'+menu.title">
-        <!-- 
-        <li v-for="(item, k) in menu.subTree" :key="k" :menu="item" :class="itemClass + ' ml-2'" v-if="item.path">{{ item.title }}</li>
-
-        <li v-else :class="itemClass">
-          <tree-side-menus :menus="[item]" :sub="true" />
-        </li>
- -->
         <li 
           v-for="(item, k) in subMenus" 
           :menu="item" 

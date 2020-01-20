@@ -1,11 +1,11 @@
 <template>
-    <component class=""
+    <component class="dropdown"
                :is="tag"
-               :class="[{}, {'dropdown': direction === 'down'}, {'dropup': direction ==='up'}]"
+               :class="[{show: isOpen}, {'dropdown': direction === 'down'}, {'dropup': direction ==='up'}]"
                aria-haspopup="true"
                :aria-expanded="isOpen"
-               @click.stop="toggleDropDown"
-               :v-click-outside="closeDropDown">
+               @click="toggleDropDown"
+               v-click-outside="closeDropDown">
 
         <slot name="title">
             <a class="dropdown-toggle nav-link"
@@ -15,13 +15,7 @@
                 <span class="no-icon">{{title}}</span>
             </a>
         </slot>
-
-        <div v-if="tag == 'div'" class="dropdown-menu"
-            :class="[{'dropdown-menu-right': position === 'right'}, {show: isOpen}, menuClasses]">
-            <slot></slot>
-        </div>
-
-        <ul v-else class="dropdown-menu"
+        <ul class="dropdown-menu"
             :class="[{'dropdown-menu-right': position === 'right'}, {show: isOpen}, menuClasses]">
             <slot></slot>
         </ul>

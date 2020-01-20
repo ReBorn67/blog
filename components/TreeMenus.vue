@@ -1,12 +1,12 @@
 <template>
-    <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-        <tree-menu-item 
-            v-for="(menu, i) in menus" 
-            :key="i"
-            :menu="menu"
-            :sub="sub"
-        />
-    </ul>
+  <div class="navbar-nav navbar-nav-hover align-items-lg-center">
+    <tree-menu-item 
+      v-for="(menu, i) in menus" 
+      :key="i"
+      :menu="menu"
+      :sub="sub"
+    />
+  </div>
 </template>
 
 <script>

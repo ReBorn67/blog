@@ -18,7 +18,7 @@
 
             <tree-menus :menus="menus" :sub="false" />
 
-            <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+            <ul class="navbar-nav align-items-lg-center ml-lg-auto d-none">
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" href="https://www.facebook.com/creativetim" target="_blank" rel="noopener"
                        data-toggle="tooltip" title="Like us on Facebook">
@@ -62,7 +62,7 @@
 </template>
 <script>
 import BaseNav from "~/baseComponents/BaseNav";
-import BaseDropdown from "~/baseComponents/BaseDropdown";
+// import BaseDropdown from "~/baseComponents/BaseDropdown";
 import CloseButton from "~/baseComponents/CloseButton";
 import TreeMenus from "~/components/TreeMenus";
 
@@ -70,7 +70,7 @@ export default {
     components: {
         BaseNav,
         CloseButton,
-        BaseDropdown,
+        // BaseDropdown,
         TreeMenus
     },
     props: {

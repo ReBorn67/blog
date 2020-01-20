@@ -1,10 +1,10 @@
 <template>
     <component class=""
                :is="tag"
-               :class="[{}, {'dropdown': direction === 'down'}, {'dropup': direction ==='up'}]"
+               :class="[{show: isOpen}, {'dropdown': direction === 'down'}, {'dropup': direction ==='up'}]"
                aria-haspopup="true"
                :aria-expanded="isOpen"
-               @click.stop="toggleDropDown"
+               @click="toggleDropDown"
                :v-click-outside="closeDropDown">
 
         <slot name="title">
@@ -29,7 +29,7 @@
 </template>
 <script>
 export default {
-  name: "base-dropdown",
+  name: "custom-dropdown",
   props: {
     direction: {
       type: String,
@@ -59,6 +59,9 @@ export default {
       type: String,
       default: "li",
       description: "Dropdown html tag (e.g div, li etc)"
+    },
+    notFunc: {
+      type: Boolean
     }
   },
   data() {
@@ -68,8 +71,10 @@ export default {
   },
   methods: {
     toggleDropDown() {
-      this.isOpen = !this.isOpen;
-      this.$emit("change", this.isOpen);
+      if (!this.notFunc) {
+        this.isOpen = !this.isOpen;
+        this.$emit("change", this.isOpen);
+      }
     },
     closeDropDown() {
       this.isOpen = false;
