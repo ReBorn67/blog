@@ -7,7 +7,7 @@
         <div class="row">
           <component :class="['d-none', sideMenus.length ? 'd-lg-block' : '']" :is="sideMenusView" :menus="sideMenus"></component>
 
-          <fade-transition :class="['col ml-auto', sideMenusLength ? 'col-lg-9' : '']" origin="center" mode="out-in" :duration="250">
+          <fade-transition :class="['col ml-auto', sideMenus.length ? 'col-lg-9' : '']" origin="center" mode="out-in" :duration="250">
             <div id="content"><nuxt /></div>
           </fade-transition>
         </div>
@@ -38,18 +38,15 @@ export default {
   computed: mapState(['sideMenus']),
   watch: {
     sideMenus (sideMenus) {
-      console.log(sideMenus);
       let AppLeftSide = () => import("./AppLeftSide");
 
       this.sideMenusView = AppLeftSide;
-      this.sideMenusLength = sideMenus.length;
     }
   },
   data () {
     return {
       menus: {},
-      sideMenusView: '',
-      sideMenusLength: 0
+      sideMenusView: ''
     };
   },
   methods: {
@@ -130,7 +127,6 @@ export default {
     },
     setSubMenus (menus) {
       let path = this.$router.currentRoute.path;
-      console.log(path);
 
       if (path.substring(1) == '') {
         return false;
