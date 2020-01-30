@@ -10,8 +10,11 @@ export const state = () => ({
 
 export const mutations = {
   setSideMenus (state, payload) {
-    if (typeof payload !== 'undefined' && payload !== false) {
-      if (JSON.stringify([payload]) !== JSON.stringify(state.sideMenus)) {
+    if (typeof payload !== 'undefined') {
+      if (payload === false) {
+        state.sideMenus = [];
+
+      } else if (JSON.stringify([payload]) !== JSON.stringify(state.sideMenus)) {
         state.sideMenus = [];
         state.sideMenus.push(payload);
       }
