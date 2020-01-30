@@ -6,7 +6,10 @@
   >
     <ul class="list-group">
       <div data-toggle="collapse" :data-target="'#collapse_'+menu.title" aria-expanded="true" :aria-controls="'collapse_'+menu.title">
-        <li :class="titleClass">{{ menu.title }}</li>
+        <li :class="titleClass" @click="isOpen = !isOpen">
+          <i :class="['fa font-weight-bold align-middle m-0', isOpen ? 'fa-folder-open-o' : 'fa-folder-o']" aria-hidden="true"></i>
+          <span>{{ menu.title }}</span>
+        </li>
       </div>
 
       <div :id="'collapse_'+menu.title" class="collapse" :data-parent="'#accordion_'+menu.title">
@@ -15,14 +18,18 @@
           :menu="item" 
           :class="[
             subItemClass, k == 0 ? 
-              subMenus.length == 1 ? 'pl-2 pr-0 pt-2 pb-1' : 'pl-2 pr-0 py-2' : 
+              (subMenus.length == 1 ? 'pl-2 pr-0 pt-2 pb-1' : 'pl-2 pr-0 py-2') : 
               'pl-2 pr-0 pt-0 pb-2'
           ]"
         >
           <tree-side-menus :menus="[item]" :sub="true" />
         </li>
 
-        <li v-for="(item, k) in linkMenus" :key="k" :menu="item" :class="linkItemClass + ' ml-2'" v-if="item.path">{{ item.title }}</li>
+        <li v-for="(item, k) in linkMenus" :key="k" :menu="item" :class="linkItemClass + ' ml-2'" v-if="item.path">
+          <router-link to="#" @click.native="menuLinkEvent(item.path)">
+            <span>{{ item.title }}</span>
+          </router-link>
+        </li>
 
       </div>
     </ul>
@@ -46,20 +53,25 @@ export default {
   },
   data() {
     return {
-      titleClass: 'list-group-item cursor-pointer p-2 active bg-gray border-0',
+      titleClass: 'list-group-item cursor-pointer p-2 active bg-white border-0 text-dark',
       linkItemClass: 'list-group-item cursor-pointer p-2 border-0',
       subItemClass: 'list-group-item cursor-pointer border-0',
 
       linkMenus: this.menu['subTree'].filter((item, index) => { return item.path; }),
       subMenus: this.menu['subTree'].filter((item, index) => { return !item.path; }),
+
+      isOpen: false
+    }
+  },
+  methods: {
+    menuLinkEvent (path) {
+      this.$store.commit('setSideMenus', this.menu);
+
+      this.$router.push({ path: path });
     }
   },
   mounted() {
   },
-  computed: {
-  },
-  methods: {
-  }
 }
 </script>
 

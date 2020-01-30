@@ -1,7 +1,7 @@
 <template>
     <header class="header-global sticky-top bg-dark">
         <base-nav id="header" class="navbar-main" type="" effect="dark" expand>
-            <router-link slot="brand" class="navbar-brand mr-lg-5" to="/">
+            <router-link slot="brand" class="navbar-brand mr-lg-5" to="/" @click.native="$store.commit('setSideMenus', false)">
                 <img :src="HOME_PATH+'img/brand/white.png'" alt="logo">
             </router-link>
 
@@ -62,7 +62,6 @@
 </template>
 <script>
 import BaseNav from "~/baseComponents/BaseNav";
-// import BaseDropdown from "~/baseComponents/BaseDropdown";
 import CloseButton from "~/baseComponents/CloseButton";
 import TreeMenus from "~/components/TreeMenus";
 
@@ -70,7 +69,6 @@ export default {
     components: {
         BaseNav,
         CloseButton,
-        // BaseDropdown,
         TreeMenus
     },
     props: {
@@ -86,12 +84,8 @@ export default {
     methods: {
         handleScroll (event) {
             if (window.scrollY) {
-                // $('#header').removeClass('navbar-light');
-                // $('#header').addClass('navbar-dark bg-primary');
                 $('#header').addClass('bg-primary');
             } else {
-                // $('#header').addClass('navbar-light');
-                // $('#header').removeClass('navbar-dark bg-primary');
                 $('#header').removeClass('bg-primary');
             }
         }

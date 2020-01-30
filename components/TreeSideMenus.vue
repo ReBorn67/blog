@@ -1,10 +1,10 @@
 <template>
   <div :id="[sub ? '' : 'left-side-menus']">
     <tree-side-menu-item 
-        v-for="(menu, i) in menus" 
-        :key="i"
-        :menu="menu"
-        :sub="sub"
+      v-for="(menu, i) in menus" 
+      :key="i"
+      :menu="menu"
+      :sub="sub"
     />
   </div>
 </template>
