@@ -8,7 +8,7 @@
       <div data-toggle="collapse" :data-target="'#collapse_'+menu.title" aria-expanded="true" :aria-controls="'collapse_'+menu.title">
         <li :class="titleClass" @click="isOpen = !isOpen">
           <i :class="['fa font-weight-bold align-middle m-0', isOpen ? 'fa-folder-open-o' : 'fa-folder-o']" aria-hidden="true"></i>
-          <span>{{ menu.title }}</span>
+          <span>{{ setFirstUpper(menu.title) }}</span>
         </li>
       </div>
 
@@ -26,7 +26,7 @@
         </li>
 
         <li v-for="(item, k) in linkMenus" :key="k" :menu="item" :class="linkItemClass + ' ml-2'" v-if="item.path">
-          <router-link to="#" @click.native="menuLinkEvent(item.path)">
+          <router-link to="" @click.native="menuLinkEvent(item.path)">
             <span>{{ item.title }}</span>
           </router-link>
         </li>
@@ -68,6 +68,13 @@ export default {
       this.$store.commit('setSideMenus', this.menu);
 
       this.$router.push({ path: path });
+    },
+    setFirstUpper (text) {
+      let check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+
+      if (check.test(text.charAt(0))) return text;
+
+      return text.charAt(0).toUpperCase() + text.slice(1);
     }
   },
   mounted() {

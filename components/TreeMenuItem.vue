@@ -9,7 +9,7 @@
       :class="[sub ? 'dropdown-item px-0 px-lg-3' : 'nav-link']"
     >
       <i :class="['fa font-weight-bold align-middle m-0 d-lg-none', isOpen ? 'fa-folder-open-o' : 'fa-folder-o']" aria-hidden="true"></i>
-      <span class="nav-link-inner--text ml-1">{{ menu.title }}</span>
+      <span class="nav-link-inner--text ml-1">{{ setFirstUpper(menu.title) }}</span>
     </a>
 
     <tree-menus v-for="(item, k) in subMenus" :key="item.title" :menus="[item]" :sub="true" />
@@ -18,7 +18,7 @@
       v-for="(item, k) in linkMenus" 
       :key="k" 
       :menu="item" 
-      to="#" 
+      to="" 
       class="dropdown-item px-0 px-lg-3 ml-2 ml-lg-0"
       @click.native="menuLinkEvent(item.path)"
     >
@@ -59,6 +59,13 @@ export default {
       this.$store.commit('setSideMenus', this.menu);
 
       this.$router.push({ path: path });
+    },
+    setFirstUpper (text) {
+      let check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+
+      if (check.test(text.charAt(0))) return text;
+
+      return text.charAt(0).toUpperCase() + text.slice(1);
     }
   },
   mounted() {

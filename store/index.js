@@ -2,11 +2,11 @@
 
 export const modules = () => ({
   login
-})
+});
 
 export const state = () => ({
   sideMenus: []
-})
+});
 
 export const mutations = {
   setSideMenus (state, payload) {
@@ -20,7 +20,7 @@ export const mutations = {
       }
     }
   }
-}
+};
 
 export const actions = {
-}
+};

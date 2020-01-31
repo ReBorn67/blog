@@ -58,7 +58,7 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: (base_path + 'favicon.ico') },
+      { rel: 'icon', type: 'image/x-icon', href: (base_path + 'img/brand/favicon-color.ico') },
       { rel: 'stylesheet', type: 'text/css', href: (base_path + 'vendor/nucleo/css/nucleo.css') },
       { rel: 'stylesheet', type: 'text/css', href: (base_path + 'vendor/font-awesome/css/font-awesome.css') },
       { rel: 'stylesheet', type: 'text/css', href: (base_path + 'vendor/cookie-run/css/cookierun-webfont.css') },

@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import { mapState } from 'vuex';
 
 import AppHeader from "./AppHeader";
@@ -41,6 +40,15 @@ export default {
       let AppLeftSide = () => import("./AppLeftSide");
 
       this.sideMenusView = AppLeftSide;
+    },
+    $route (to, from) {
+      if (
+        typeof this.sideMenus[0] == 'undefined' || 
+        this.sideMenus[0].title !== to.path.substring(1)
+      ) {
+        let sideMenus = this.setSubMenus(this.menus);
+        this.$store.commit('setSideMenus', sideMenus);
+      }
     }
   },
   data () {
@@ -160,8 +168,8 @@ export default {
   beforeMount () {
     this.menus = this.getMenus();
 
-    let subMenus = this.setSubMenus(this.menus);
-    this.$store.commit('setSideMenus', subMenus);
+    let sideMenus = this.setSubMenus(this.menus);
+    this.$store.commit('setSideMenus', sideMenus);
   },
   mounted () {
   }
