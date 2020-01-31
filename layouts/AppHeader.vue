@@ -8,7 +8,10 @@
 
       <div class="row" slot="content-header" slot-scope="{closeMenu}">
         <div class="col-6 collapse-brand">
-          <a href="https://demos.creative-tim.com/vue-argon-design-system/documentation/">
+          <router-link slot="brand" class="navbar-brand mr-lg-5" to="/" @click.native="$store.commit('setSideMenus', false)">
+            <img :src="HOME_PATH+'img/brand/logo-color.png'">
+          </router-link>
+          <a v-if="false" href="/">
             <img :src="HOME_PATH+'img/brand/logo-color.png'">
           </a>
         </div>

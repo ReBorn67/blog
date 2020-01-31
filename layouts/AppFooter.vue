@@ -109,6 +109,11 @@ export default {
 }
 
 @media (max-width: 991px) {
+  .footer {
+    padding-top: 1.5rem !important;
+    margin-top: 0 !important;
+  }
+
   .footer .container {
     max-width: 100%;
   }
