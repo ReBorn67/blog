@@ -8,16 +8,13 @@
 
       <div class="row" slot="content-header" slot-scope="{closeMenu}">
         <div class="col-6 collapse-brand">
-          <router-link slot="brand" class="navbar-brand mr-lg-5" to="/" @click.native="$store.commit('setSideMenus', false)">
+          <router-link slot="brand" class="navbar-brand mr-lg-5" to="/" @click.native="menuClickEvent">
             <img :src="HOME_PATH+'img/brand/logo-color.png'">
           </router-link>
-          <a v-if="false" href="/">
-            <img :src="HOME_PATH+'img/brand/logo-color.png'">
-          </a>
         </div>
 
         <div class="col-6 collapse-close">
-          <close-button @click="closeMenu"></close-button>
+          <close-button id="mobile-menu-close" @click="closeMenu"></close-button>
         </div>
       </div>
 
@@ -70,6 +67,13 @@ export default {
 
         $('#header').removeClass('bg-lighter');
       }
+    },
+    menuClickEvent () {
+      if ($('#header .collapse.navbar-collapse').hasClass('show')) {
+        $('#mobile-menu-close').click();
+      }
+      
+      this.$store.commit('setSideMenus', false);
     }
   },
   beforeMount () {

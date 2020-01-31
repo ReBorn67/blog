@@ -56,6 +56,10 @@ export default {
       this.isOpen = isOpen;
     },
     menuLinkEvent (path) {
+      if ($('#header .collapse.navbar-collapse').hasClass('show')) {
+        $('#mobile-menu-close').click();
+      }
+
       this.$store.commit('setSideMenus', this.menu);
 
       this.$router.push({ path: path });
