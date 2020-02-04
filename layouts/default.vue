@@ -15,6 +15,8 @@
     </main>
 
     <app-footer name="footer"></app-footer>
+
+    <app-float-buttons></app-float-buttons>
   </div>
 </template>
 
@@ -24,6 +26,7 @@ import { mapState } from 'vuex';
 import AppHeader from "./AppHeader";
 import AppFooter from "./AppFooter";
 import AppLeftSide from "./AppLeftSide";
+import AppFloatButtons from "./AppFloatButtons";
 import { FadeTransition } from "vue2-transitions";
 
 import deepmerge from 'deepmerge';
@@ -32,6 +35,7 @@ export default {
   components: {
     AppHeader,
     AppFooter,
+    AppFloatButtons,
     FadeTransition
   },
   computed: mapState(['sideMenus']),
