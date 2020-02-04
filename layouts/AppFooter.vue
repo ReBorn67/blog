@@ -74,7 +74,7 @@
     </div>
 
     <div class="container bg-max-lg-light">
-      <div class="row align-items-center justify-content-md-between py-4">
+      <div class="row align-items-center justify-content-md-between py-2 py-lg-4">
         <div class="col text-center">
           <div class="copyright">
             <span>ReBorn67's IT Blog</span>

@@ -80,6 +80,8 @@ $darker:        darken($gray-900, 15%) !default;
 $theme1:        #65B2B5 !default;
 $theme2:        #65A1B5 !default;
 $theme3:        #6591B5 !default;
+$theme4:        #6580B5 !default;
+$theme5:        #6570B5 !default;
 
 $facebook:      #3b5999 !default;
 $twitter:       #1da1f2 !default;
@@ -107,7 +109,9 @@ $theme-colors: map-merge((
   
   "theme1":       $theme1,
   "theme2":       $theme2,
-  "theme3":       $theme3
+  "theme3":       $theme3,
+  "theme4":       $theme4,
+  "theme5":       $theme5
 ), $theme-colors);
 
 $brand-colors: () !default;

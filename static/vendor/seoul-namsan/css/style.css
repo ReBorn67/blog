@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'SeoulNamsanM';
+  src: url('../fonts/SeoulNamsanM.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: "SeoulNamsanM", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}

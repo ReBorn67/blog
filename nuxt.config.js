@@ -61,7 +61,9 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: (base_path + 'img/brand/favicon-color.ico') },
       { rel: 'stylesheet', type: 'text/css', href: (base_path + 'vendor/nucleo/css/nucleo.css') },
       { rel: 'stylesheet', type: 'text/css', href: (base_path + 'vendor/font-awesome/css/font-awesome.css') },
-      { rel: 'stylesheet', type: 'text/css', href: (base_path + 'vendor/cookie-run/css/cookierun-webfont.css') },
+      // { rel: 'stylesheet', type: 'text/css', href: (base_path + 'vendor/cookie-run/css/style.css') },
+      // { rel: 'stylesheet', type: 'text/css', href: (base_path + 'vendor/mapo-peacefull/css/style.css') },
+      { rel: 'stylesheet', type: 'text/css', href: (base_path + 'vendor/seoul-namsan/css/style.css') },
     ],
     script: [
       { src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js' }
