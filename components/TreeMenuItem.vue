@@ -9,7 +9,7 @@
       :class="[sub ? 'dropdown-item px-0 px-lg-3' : 'nav-link']"
     >
       <i :class="['fa font-weight-bold align-middle m-0 d-lg-none', isOpen ? 'fa-folder-open-o' : 'fa-folder-o']" aria-hidden="true"></i>
-      <span class="nav-link-inner--text ml-1">{{ setFirstUpper(menu.title) }}</span>
+      <span class="nav-link-inner--text ml-1">{{ setUpperTitle(menu.title) }}</span>
     </a>
 
     <tree-menus v-for="(item, k) in subMenus" :key="item.title" :menus="[item]" :sub="true" />
@@ -64,10 +64,12 @@ export default {
 
       this.$router.push({ path: path });
     },
-    setFirstUpper (text) {
+    setUpperTitle (text) {
       let check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
 
-      if (check.test(text.charAt(0))) return text;
+      if (check.test(text.charAt(0)) || text == 'etc') return text;
+
+      if (text == 'php') return text.toUpperCase();
 
       return text.charAt(0).toUpperCase() + text.slice(1);
     }

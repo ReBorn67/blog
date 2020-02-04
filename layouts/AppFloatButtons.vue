@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button type="button" class="btn btn-theme4 btn-float bottom-1 rounded-circle" @click="scrollToTop">
+        <button type="button" class="btn btn-theme4-d btn-float bottom-1 rounded-circle" @click="scrollToTop">
             <i class="fa fa-arrow-up" aria-hidden="true"></i>
         </button>
     </div>

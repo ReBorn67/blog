@@ -5,10 +5,10 @@
     :class="['pb-2 border-bottom border-dark', sub ? '' : 'mb-2 mr-2']"
   >
     <ul class="list-group">
-      <div data-toggle="collapse" :data-target="'#collapse_'+menu.title" aria-expanded="true" :aria-controls="'collapse_'+menu.title">
-        <li :class="titleClass" @click="isOpen = !isOpen">
+      <div data-toggle="collapse" :data-target="'#collapse_'+menu.title" aria-expanded="false" :aria-controls="'collapse_'+menu.title">
+        <li :class="titleClass" @click="menuFolderEvent($event)">
           <i :class="['fa font-weight-bold align-middle m-0', isOpen ? 'fa-folder-open-o' : 'fa-folder-o']" aria-hidden="true"></i>
-          <span>{{ setFirstUpper(menu.title) }}</span>
+          <span>{{ setUpperTitle(menu.title) }}</span>
         </li>
       </div>
 
@@ -60,19 +60,50 @@ export default {
       linkMenus: this.menu['subTree'].filter((item, index) => { return item.path; }),
       subMenus: this.menu['subTree'].filter((item, index) => { return !item.path; }),
 
-      isOpen: false
+      isOpen: false,
+      isFolderClick: false
     }
   },
   methods: {
+    menuFolderEvent (event) {
+      event.preventDefault();
+
+      if (!this.isFolderClick) {
+        this.isFolderClick = true;
+
+        let self = this;
+
+        let checker = setInterval(function() {
+          let div  = $(event.target).parents('[aria-expanded]');
+          let attr = div.attr('aria-expanded');
+          console.log(div);
+          console.log(attr);
+          console.log('check');
+
+          if ((!self.isOpen).toString() === attr) {
+            self.isOpen = !self.isOpen;
+
+            self.isFolderClick = false;
+
+            console.log(self.isOpen);
+            console.log('clear');
+
+            clearInterval(checker);
+          }
+        }, 100);
+      }
+    },
     menuLinkEvent (path) {
       this.$store.commit('setSideMenus', this.menu);
 
       this.$router.push({ path: path });
     },
-    setFirstUpper (text) {
+    setUpperTitle (text) {
       let check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
 
-      if (check.test(text.charAt(0))) return text;
+      if (check.test(text.charAt(0)) || text == 'etc') return text;
+
+      if (text == 'php') return text.toUpperCase();
 
       return text.charAt(0).toUpperCase() + text.slice(1);
     }

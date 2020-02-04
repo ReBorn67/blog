@@ -38,10 +38,15 @@ export default {
       type: Array
     }
   },
+  watch: {
+    $route (to, from) {
+      this.isScrolled = window.scrollY;
+    }
+  },
   data () {
     return {
       HOME_PATH: process.env.HOME_PATH,
-      isScrolled: false
+      isScrolled: window.scrollY
     };
   },
   methods: {

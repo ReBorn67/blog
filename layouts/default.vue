@@ -72,6 +72,10 @@ export default {
       clone.map((pathArr, index) => {
         let title = pathArr[0];
 
+        if (title.substring(title.length-1) == '?') {
+          title = title.substring(0, title.length-1);
+        }
+
         if (pathArr.length == 1) {
           obj['subTree'].push({
             title: title,
@@ -111,6 +115,33 @@ export default {
           return pathArr;
         }
       });
+
+      /* back to etc, example */
+
+      let sortTitle = ['etc', 'example'];
+      let sortObj  = [];
+      let sortSub  = [];
+
+      let objClone = deepmerge([], obj['subTree']);
+      let subClone = deepmerge([], sub);
+
+      objClone.map((item, index) => {
+        let idx = -1;
+
+        if ((idx = sortTitle.indexOf(item.title)) > -1) {
+          sortObj[idx] = item;
+          sortSub[idx] = subClone[index];
+          objClone[index] = false;
+          subClone[index] = false;
+        }
+      });
+
+      objClone = objClone.filter((item) => { return item; });
+      obj['subTree'] = deepmerge(objClone, sortObj);
+      subClone = subClone.filter((item) => { return item; });
+      sub = deepmerge(subClone, sortSub);
+
+      /* recursive */
 
       sub.forEach(function(item, index) {
         if (item.length) {

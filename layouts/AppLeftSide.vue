@@ -32,7 +32,9 @@ export default {
   },
   methods: {
     handleLeftSide (event) {
-      this.marginTop = $('#content').outerHeight() - 700 < window.scrollY ? $('#content').outerHeight() - 700 : window.scrollY;
+      if ($('#content').outerHeight() > 700) {
+        this.marginTop = $('#content').outerHeight() - 700 < window.scrollY ? $('#content').outerHeight() - 700 : window.scrollY;
+      }
     }
   },
   mounted () {

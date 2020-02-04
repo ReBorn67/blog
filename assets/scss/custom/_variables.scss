@@ -77,11 +77,17 @@ $danger:        $red !default;
 $light:         $gray-500 !default;
 $dark:          $gray-900 !default;
 $darker:        darken($gray-900, 15%) !default;
+
 $theme1:        #65B2B5 !default;
 $theme2:        #65A1B5 !default;
 $theme3:        #6591B5 !default;
 $theme4:        #6580B5 !default;
 $theme5:        #6570B5 !default;
+$theme1-d:      #477E80 !default;
+$theme2-d:      #477180 !default;
+$theme3-d:      #476680 !default;
+$theme4-d:      #475A80 !default;
+$theme5-d:      #474F80 !default;
 
 $facebook:      #3b5999 !default;
 $twitter:       #1da1f2 !default;
@@ -111,7 +117,12 @@ $theme-colors: map-merge((
   "theme2":       $theme2,
   "theme3":       $theme3,
   "theme4":       $theme4,
-  "theme5":       $theme5
+  "theme5":       $theme5,
+  "theme1-d":     $theme1-d,
+  "theme2-d":     $theme2-d,
+  "theme3-d":     $theme3-d,
+  "theme4-d":     $theme4-d,
+  "theme5-d":     $theme5-d
 ), $theme-colors);
 
 $brand-colors: () !default;
