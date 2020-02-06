@@ -56,7 +56,8 @@ export default {
       console.log(res);
       setTimeout(function () {
         console.log(res);
-        self.data = res;
+        self.tags = res;
+        self.data = res[query.key];
         // store.commit('setCheckObj', {key: 'tags', value: true});
       }, 1000);
     });
