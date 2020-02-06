@@ -5,8 +5,22 @@
     :class="['pb-2 border-bottom border-dark', sub ? '' : 'mb-2 mr-2']"
   >
     <ul class="list-group">
-      <div data-toggle="collapse" :data-target="'#collapse_'+menu.title" aria-expanded="false" :aria-controls="'collapse_'+menu.title">
-        <li :class="titleClass" @click="menuFolderEvent($event)">
+      <div :id="'fake_collapse_'+menu.title+'_btn'">
+        <li :class="titleClass" @click.self.prevent="menuFolderEvent($event)">
+          <i :class="['fa font-weight-bold align-middle m-0', isOpen ? 'fa-folder-open-o' : 'fa-folder-o']" aria-hidden="true"></i>
+          <span>{{ setUpperTitle(menu.title) }}</span>
+        </li>
+      </div>
+
+      <div 
+        :id="'real_collapse_'+menu.title+'_btn'"
+        class="d-none" 
+        data-toggle="collapse" 
+        :data-target="'#collapse_'+menu.title" 
+        aria-expanded="false" 
+        :aria-controls="'collapse_'+menu.title"
+      >
+        <li :class="titleClass">
           <i :class="['fa font-weight-bold align-middle m-0', isOpen ? 'fa-folder-open-o' : 'fa-folder-o']" aria-hidden="true"></i>
           <span>{{ setUpperTitle(menu.title) }}</span>
         </li>
@@ -30,7 +44,6 @@
             <span>{{ item.title }}</span>
           </router-link>
         </li>
-
       </div>
     </ul>
   </div>
@@ -51,7 +64,7 @@ export default {
         type: Boolean
     }
   },
-  data() {
+  data () {
     return {
       titleClass: 'list-group-item cursor-pointer p-2 active bg-white border-0 text-dark',
       linkItemClass: 'list-group-item cursor-pointer p-2 border-0',
@@ -61,36 +74,29 @@ export default {
       subMenus: this.menu['subTree'].filter((item, index) => { return !item.path; }),
 
       isOpen: false,
-      isFolderClick: false
+      folder: false,
+      isFolderClick: false,
+      interval: false,
     }
   },
   methods: {
-    menuFolderEvent (event) {
-      event.preventDefault();
+    menuFolderEvent (event, isOpen) {
+      let self = this;
+
+      let fakeBtn  = $('#fake_collapse_'+this.menu.title+'_btn');
+      let realBtn  = $('#real_collapse_'+this.menu.title+'_btn');
+      let collapse = $('#collapse_'+this.menu.title);
 
       if (!this.isFolderClick) {
         this.isFolderClick = true;
 
-        let self = this;
+        this.isOpen = !this.isOpen;
 
-        let checker = setInterval(function() {
-          let div  = $(event.target).parents('[aria-expanded]');
-          let attr = div.attr('aria-expanded');
-          console.log(div);
-          console.log(attr);
-          console.log('check');
+        realBtn.click();
 
-          if ((!self.isOpen).toString() === attr) {
-            self.isOpen = !self.isOpen;
-
-            self.isFolderClick = false;
-
-            console.log(self.isOpen);
-            console.log('clear');
-
-            clearInterval(checker);
-          }
-        }, 100);
+        setTimeout(function () {
+          self.isFolderClick = false;
+        }, 350);
       }
     },
     menuLinkEvent (path) {
@@ -108,7 +114,9 @@ export default {
       return text.charAt(0).toUpperCase() + text.slice(1);
     }
   },
-  mounted() {
+  beforeMount () {
+  },
+  mounted () {
   },
 }
 </script>

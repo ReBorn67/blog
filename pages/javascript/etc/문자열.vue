@@ -1,4 +1,4 @@
-<template>
+<template v-bind:test="123">
   <div>
     <div class="section-shaped my-0">
       <div class="shape shape-style-1 shape-primary">
@@ -30,7 +30,7 @@
       <div id="section1" class="doc-section">
         <h2>1. 찾기</h2>
 
-        <tabs fill class="flex-column flex-md-row">
+        <tabs fill class="flex-column flex-md-row" :tabNavItemCount="3">
           <card shadow slot-scope="{activeTabIndex}">
             <tab-pane title="indexOf">
               <h4>1) indexOf</h4>
@@ -194,13 +194,14 @@
   </div>
 </template>
 <script>
-import Tabs from "~/baseComponents/Tabs/Tabs.vue";
-import TabPane from "~/baseComponents/Tabs/TabPane.vue";
+import Tabs from "~/components/Tabs/Tabs.vue";
+import TabPane from "~/components/Tabs/TabPane.vue";
 
 export default {
   name: 'javascript-etc-string',
   title: '문자열',
-  tag: '#Javascript,#문자열,#문자열검색,#indexOf,#lodash,#정규식',
+  tag: 'Javascript,문자열,문자열검색,indexOf,lodash,정규식',
+  timestamp: '2020-02-04',
   components: {
     Tabs,
     TabPane
@@ -209,6 +210,10 @@ export default {
     return {
       HOME_PATH: process.env.HOME_PATH
     };
+  },
+  methods: {
+  },
+  beforeMount () {
   }
 };
 </script>
@@ -218,7 +223,6 @@ export default {
 }
 
 .doc-section .nav-link.active {
-  background-color: #475A80;
+  /*background-color: #475A80;*/
 }
-
 </style>

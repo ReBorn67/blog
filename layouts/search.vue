@@ -5,9 +5,7 @@
     <main class="mt-4">
       <div class="container">
         <div class="row">
-          <component :class="['d-none', sideMenus.length ? 'd-lg-block' : '']" :is="sideMenusView" :menus="sideMenus"></component>
-
-          <fade-transition :class="['col ml-auto', sideMenus.length ? 'col-lg-9' : '']" origin="center" mode="out-in" :duration="250">
+          <fade-transition class="col" origin="center" mode="out-in" :duration="250">
             <div id="content"><nuxt /></div>
           </fade-transition>
         </div>
@@ -38,27 +36,12 @@ export default {
     AppFloatButtons,
     FadeTransition
   },
-  computed: mapState(['sideMenus', 'checkObj', 'tags']),
+  computed: mapState(['sideMenus', 'checkObj']),
   watch: {
-    sideMenus (sideMenus) {
-      let AppLeftSide = () => import("./AppLeftSide");
-
-      this.sideMenusView = AppLeftSide;
-    },
-    $route (to, from) {
-      if (
-        typeof this.sideMenus[0] == 'undefined' || 
-        this.sideMenus[0].title !== to.path.substring(1)
-      ) {
-        let sideMenus = this.setSubMenus(this.menus);
-        this.$store.commit('setSideMenus', sideMenus);
-      }
-    }
   },
   data () {
     return {
       menus: {},
-      sideMenusView: ''
     };
   },
   methods: {
@@ -167,57 +150,23 @@ export default {
       let res = this.createMenu(pathTotalArr, menus, '');
 
       return res.subTree;
-    },
-    setSubMenus (menus) {
-      let path = this.$router.currentRoute.path;
-
-      if (path.substring(1) == '') {
-        return false;
-      }
-
-      let split = path.substring(1).split('/');
-      split.pop();
-
-      let clone = [deepmerge([], menus)];
-
-      let result = {
-        title: '',
-        subTree: false
-      }
-
-      split.forEach(function(title, index) {
-        clone[index].some((item, idx) => {
-          if (item.title == title) {
-            result.title = title;
-            clone.push(item.subTree);
-            return true;
-          }
-        });
-      });
-
-      result.subTree = clone.pop();
-
-      return result;
     }
   },
   beforeCreate () {
     let store = this.$store;
-    
+
     store.dispatch('setTags', this.$router.options.routes).then(() => {
       let self = this;
 
       setTimeout(function () {
         store.commit('setCheckObj', {key: 'tags', value: true});
-      }, 1000);
+      }, 500);
     });
   },
   created () {
   },
   beforeMount () {
     this.menus = this.getMenus();
-
-    let sideMenus = this.setSubMenus(this.menus);
-    this.$store.commit('setSideMenus', sideMenus);
   },
   mounted () {
   }
