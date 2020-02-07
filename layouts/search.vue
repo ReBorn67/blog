@@ -151,9 +151,9 @@ export default {
 
       return res.subTree;
     },
-    setTags () {
-      this.$store.dispatch('setTags', this.$router.options.routes);
-    },
+    setPCT () {
+      this.$store.dispatch('setPCT', this.$router.options.routes);
+    }
   },
   beforeCreate () {
   },
@@ -161,7 +161,7 @@ export default {
   },
   beforeMount () {
     this.menus = this.getMenus();
-    this.setTags();
+    this.setPCT();
   },
   mounted () {
   }

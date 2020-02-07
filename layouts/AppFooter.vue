@@ -9,14 +9,20 @@
               <h6 class="text-theme1 text-uppercase mb-0 ml-4 align-self-center">Recent Posts</h6>
             </div>
 
-            <div class="">
-              <a v-for="n in 6" href="#" class="d-flex w-100 footer-links">
+            <div v-if="!checkPosts" class="d-flex justify-content-center py-5">
+              <div class="spinner-grow text-theme1 align-self-center" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+
+            <div v-else class="">
+              <a v-for="post in recentPosts" :href="post.path" class="d-flex w-100 footer-links">
                 <h6 class="text-theme1">
                   <small><i class="fa fa-circle" aria-hidden="false"></i></small>
-                  <span class="text-truncate">recent post {{ n }}</span>
+                  <span class="text-truncate">{{ post.title }}</span>
                 </h6>
 
-                <small class="text-light ml-auto">2020-01-0{{ n }}</small>
+                <small class="text-light ml-auto">{{ post.timestamp }}</small>
               </a>
             </div>
           </card>
@@ -92,6 +98,23 @@ export default {
   watch: {
     checkPosts (checkPosts) {
       if (checkPosts) {
+        let posts      = this.$store.getters.posts;
+        let timestamps = Object.keys(posts);
+
+        let count = 0;
+
+        timestamps.forEach((timestamp, index) => {
+          if (count >= this.recentSize) return true;
+
+          posts[timestamp].forEach((post) => {
+            if (count >= this.recentSize) return true;
+
+            this.recentPosts.push(post);
+            count++;
+          });
+        });
+
+        this.posts = posts;
       }
     },
     checkCommnets (checkCommnets) {
@@ -106,6 +129,9 @@ export default {
   },
   data() {
     return {
+      recentSize: 6,
+      posts: this.$store.getters.posts,
+      recentPosts: [],
       tagKeys: Object.keys(this.$store.getters.tags),
       HOME_PATH: process.env.HOME_PATH,
       // year: new Date().getFullYear()
@@ -138,6 +164,7 @@ export default {
   .footer .container {
     max-width: 100%;
   }
+
   .footer .container.bg-max-lg-light {
     background-color: #3f79a8;
     color: white;

@@ -198,18 +198,12 @@ export default {
       result.subTree = clone.pop();
 
       return result;
+    },
+    setPCT () {
+      this.$store.dispatch('setPCT', this.$router.options.routes);
     }
   },
   beforeCreate () {
-    let store = this.$store;
-    
-    store.dispatch('setTags', this.$router.options.routes).then(() => {
-      let self = this;
-
-      setTimeout(function () {
-        store.commit('setCheckObj', {key: 'tags', value: true});
-      }, 1000);
-    });
   },
   created () {
   },
@@ -218,6 +212,8 @@ export default {
 
     let sideMenus = this.setSubMenus(this.menus);
     this.$store.commit('setSideMenus', sideMenus);
+    
+    this.setPCT();
   },
   mounted () {
   }

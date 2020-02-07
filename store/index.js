@@ -37,18 +37,39 @@ export const mutations = {
       }
     }
   },
-  setTags (state, payload) {
-    let title     = payload.title;
-    let path      = payload.path;
-    let tags      = payload.tag.split(',');
-    let timestamp = payload.timestamp;
+  setPosts (state, object) {
+    let timestamp = object.timestamp;
 
-    let object = {
-      title: title,
-      path: path,
-      tags: tags,
-      timestamp: timestamp
-    };
+    if (typeof state.posts[timestamp] == 'undefined') {
+      state.posts[timestamp] = [];
+    }
+
+    state.posts[timestamp].push(object);
+
+    /* 중복제거 */
+    let tmp = [];
+    state.posts[timestamp] = state.posts[timestamp].reduce((array, object) => {
+      let json = JSON.stringify(object);
+
+      if (tmp.indexOf(json) < 0) {
+        tmp.push(json);
+        array.push(object);
+      }
+
+      return array;
+    }, []);
+
+    /* 정렬 */
+    let tmpPosts = {};
+    let postKeys = Object.keys(state.posts);
+
+    postKeys.sort((a, b) => { return Date.parse(b) - Date.parse(a); });
+    postKeys.map((key, index) => { tmpPosts[key] = state.posts[key]; });
+
+    state.posts = tmpPosts;
+  },
+  setTags (state, object) {
+    let tags = object.tags.split(',');
 
     tags.map(function (tag) {
       if (typeof state.tags[tag] == 'undefined') {
@@ -59,22 +80,17 @@ export const mutations = {
 
       /* 중복제거 */
       let tmp = [];
-      state.tags[tag] = state.tags[tag].reduce(function(a,b){
-        let jb = JSON.stringify(b);
+      state.tags[tag] = state.tags[tag].reduce((array, object) => {
+        let json = JSON.stringify(object);
 
-        if (tmp.indexOf(jb) < 0) {
-          tmp.push(jb);
-          a.push(b);
+        if (tmp.indexOf(json) < 0) {
+          tmp.push(json);
+          array.push(object);
         }
 
-        return a;
+        return array;
       }, []);
     });
-  },
-  getTags (state, key) {
-    if (key) return state.tags[key];
-
-    return state.tags;
   }
 };
 
@@ -91,6 +107,43 @@ export const getters = {
 };
 
 export const actions = {
+  setPCT ({ state, commit }, routes) {
+    let componentsArr = {};
+    let count = 0;
+
+    componentsArr = routes.filter((item) => { return item.path.match(/\//g).length > 1; });
+
+    componentsArr.forEach(function (item, index) {
+      item.component().then((data) => {
+        data._id = item.component.name;
+        data.path = item.path;
+
+        let object = {
+          _id: item.component.name,
+          title: data.title,
+          path: item.path,
+          tags: data.tag,
+          timestamp: data.timestamp
+        };
+
+        if (object.timestamp) {
+          commit('setPosts', object);
+        }
+
+        if (object.tags) {
+          commit('setTags', object);
+        }
+
+        count++;
+
+        if (count == componentsArr.length) {
+          commit('setCheckObj', {key: 'posts', value: true});
+          // commit('setCheckObj', {key: 'commnets', value: true});
+          commit('setCheckObj', {key: 'tags', value: true});
+        }
+      });
+    });
+  },
   setTags ({ state, commit }, routes) {
     let componentsArr = {};
     let count = 0;
@@ -98,12 +151,20 @@ export const actions = {
     componentsArr = routes.filter((item) => { return item.path.match(/\//g).length > 1; });
 
     componentsArr.forEach(function (item, index) {
-      item.component().then((value) => {
-        if (value.tag) {
-          value._id = item.component.name;
-          value.path = item.path;
+      item.component().then((data) => {
+        let object = {
+          _id: item.component.name,
+          title: data.title,
+          path: item.path,
+          tags: data.tag,
+          timestamp: data.timestamp
+        };
 
-          commit('setTags', value);
+        if (data.tag) {
+          data._id = item.component.name;
+          data.path = item.path;
+
+          commit('setTags', data);
         }
 
         count++;
@@ -114,7 +175,7 @@ export const actions = {
       });
     });
   },
-  async getTags ({ state, commit }, key) {
+  getTags ({ state, commit }, key) {
     let result = {
       check: state.checkObj.tags,
       tags: state.tags

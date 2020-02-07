@@ -219,10 +219,4 @@ export default {
 </script>
 
 <style>
-.doc-section {
-}
-
-.doc-section .nav-link.active {
-  /*background-color: #475A80;*/
-}
 </style>
