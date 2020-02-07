@@ -16,14 +16,23 @@
             </div>
 
             <div v-else class="">
-              <a v-for="post in recentPosts" :href="post.path" class="d-flex w-100 footer-links">
+              <router-link v-for="post in recentPosts" :to="post.path" class="d-flex w-100 footer-links">
                 <h6 class="text-theme1">
                   <small><i class="fa fa-circle" aria-hidden="false"></i></small>
                   <span class="text-truncate">{{ post.title }}</span>
                 </h6>
 
                 <small class="text-light ml-auto">{{ post.timestamp }}</small>
-              </a>
+              </router-link>
+
+              <!-- <a v-for="post in recentPosts" :href="post.path" class="d-flex w-100 footer-links">
+                <h6 class="text-theme1">
+                  <small><i class="fa fa-circle" aria-hidden="false"></i></small>
+                  <span class="text-truncate">{{ post.title }}</span>
+                </h6>
+
+                <small class="text-light ml-auto">{{ post.timestamp }}</small>
+              </a> -->
             </div>
           </card>
         </div>
