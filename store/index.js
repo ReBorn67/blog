@@ -3,7 +3,7 @@ import deepmerge from 'deepmerge';
 // import login from './modules/login'
 
 export const modules = () => ({
-  login
+  // login
 });
 
 export const state = () => ({
@@ -93,23 +93,33 @@ export const getters = {
 export const actions = {
   setTags ({ state, commit }, routes) {
     let componentsArr = {};
+    let count = 0;
 
-    componentsArr = routes.filter((item) => { return item.path != '/' });
+    componentsArr = routes.filter((item) => { return item.path.match(/\//g).length > 1; });
 
     componentsArr.forEach(function (item, index) {
-      let path = item;
-
       item.component().then((value) => {
         if (value.tag) {
           value._id = item.component.name;
           value.path = item.path;
+
           commit('setTags', value);
+        }
+
+        count++;
+
+        if (count == componentsArr.length) {
+          commit('setCheckObj', {key: 'tags', value: true});
         }
       });
     });
   },
   async getTags ({ state, commit }, key) {
-    // return await commit('getTags', key);
-    return state.tags;
+    let result = {
+      check: state.checkObj.tags,
+      tags: state.tags
+    }
+
+    return result;
   }
 };

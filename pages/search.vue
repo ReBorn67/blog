@@ -27,7 +27,6 @@ export default {
     }
   },
   data () {
-    console.log('data')
     return {
       tags: this.$store.getters.tags,
       type: this.$route.query.type,
@@ -37,32 +36,31 @@ export default {
     };
   },
   methods: {
+    sleep (delay) {
+      let start = new Date().getTime();
+      while (new Date().getTime() < start + delay);
+    },
+    getTags () {
+      let self  = this;
+      let store = this.$store;
+      let query = this.$route.query;
+
+      store.dispatch('getTags', query.key).then((result) => {
+        if (!result.check) {
+          setTimeout(function () {
+            self.getTags();
+          }, 100);
+        } else {
+          self.tags = result.tags;
+          self.data = result.tags[query.key];
+        }
+      });
+    }
   },
   beforeCreate () {
-    let self  = this;
-    let store = this.$store;
-    let query = this.$route.query;
-
-    function sleep (delay) {
-      var start = new Date().getTime();
-      while (new Date().getTime() < start + delay);
-    }
-
-    console.log('1');
-    sleep(1000);
-    console.log('2');
-
-    store.dispatch('getTags', query.key).then((res) => {
-      console.log(res);
-      setTimeout(function () {
-        console.log(res);
-        self.tags = res;
-        self.data = res[query.key];
-        // store.commit('setCheckObj', {key: 'tags', value: true});
-      }, 1000);
-    });
   },
   beforeMount () {
+    this.getTags();
   }
 };
 </script>

@@ -150,23 +150,18 @@ export default {
       let res = this.createMenu(pathTotalArr, menus, '');
 
       return res.subTree;
-    }
+    },
+    setTags () {
+      this.$store.dispatch('setTags', this.$router.options.routes);
+    },
   },
   beforeCreate () {
-    let store = this.$store;
-
-    store.dispatch('setTags', this.$router.options.routes).then(() => {
-      let self = this;
-
-      setTimeout(function () {
-        store.commit('setCheckObj', {key: 'tags', value: true});
-      }, 500);
-    });
   },
   created () {
   },
   beforeMount () {
     this.menus = this.getMenus();
+    this.setTags();
   },
   mounted () {
   }
