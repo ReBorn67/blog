@@ -30,7 +30,7 @@
       <div id="section1" class="doc-section">
         <h2>1. 찾기</h2>
 
-        <tabs fill class="flex-column flex-md-row" :tabNavItemCount="3">
+        <tabs fill type="theme4" class="flex-column flex-md-row" :tabNavItemCount="3">
           <card shadow slot-scope="{activeTabIndex}">
             <tab-pane title="indexOf">
               <h4>1) indexOf</h4>
@@ -104,7 +104,7 @@
       <div id="section2" class="doc-section">
         <h2>2. 자르기</h2>
 
-        <tabs fill class="flex-column flex-md-row">
+        <tabs fill type="theme4" class="flex-column flex-md-row">
           <card shadow slot-scope="{activeTabIndex}">
             <tab-pane title="substring">
               <h4>1) substring</h4>
@@ -162,7 +162,7 @@
       <div id="section3" class="doc-section">
         <h2>3. 바꾸기</h2>
 
-        <tabs fill class="flex-column flex-md-row">
+        <tabs fill type="theme4" class="flex-column flex-md-row">
           <card shadow slot-scope="{activeTabIndex}">
             <tab-pane title="replace">
               <h4>1) replace</h4>

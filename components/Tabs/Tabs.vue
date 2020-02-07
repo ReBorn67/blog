@@ -21,13 +21,20 @@
               ]"
               :key="tab.id || tab.title">
 
-            <a data-toggle="tab"
-               role="tab"
-               class="nav-link"
-               :href="`#${tab.id || tab.title}`"
-               @click.prevent="activateTab(tab)"
-               :aria-selected="tab.active"
-               :class="{active: tab.active}">
+            <a 
+              data-toggle="tab"
+              role="tab"
+              class="nav-link"
+              :href="`#${tab.id || tab.title}`"
+              @click.prevent="activateTab(tab)"
+              :aria-selected="tab.active"
+              :class="[
+                tab.active ? 
+                  (type ? `active bg-${type}` : 'active') : 
+                  (type ? `text-${type}` : '')
+
+              ]"
+            >
               <tab-item-content :tab="tab">
               </tab-item-content>
             </a>
