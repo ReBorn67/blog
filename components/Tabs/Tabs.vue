@@ -77,7 +77,12 @@ export default {
           "info",
           "success",
           "warning",
-          "danger"
+          "danger",
+          "theme1",
+          "theme2",
+          "theme3",
+          "theme4",
+          "theme5"
         ];
         return acceptedValues.indexOf(value) !== -1;
       },
