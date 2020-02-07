@@ -16,7 +16,7 @@
             </div>
 
             <div v-else class="">
-              <router-link v-for="post in recentPosts" :to="post.path" class="d-flex w-100 footer-links">
+              <router-link v-for="post in recentPosts" :key="post" :to="post.path" class="d-flex w-100 footer-links">
                 <h6 class="text-theme1">
                   <small><i class="fa fa-circle" aria-hidden="false"></i></small>
                   <span class="text-truncate">{{ post.title }}</span>
@@ -62,7 +62,7 @@
             </div>
 
             <div v-else class="d-flex flex-wrap">
-              <router-link v-for="tag in tagKeys" :to="'/search?type=tags&key='+tag" class="ml-0 mr-1 mb-1 badge badge-pill badge-theme5">
+              <router-link v-for="tag in tagKeys" :key="tag" :to="'/search?type=tags&key='+tag" class="ml-0 mr-1 mb-1 badge badge-pill badge-theme5">
                 <span>{{ tag }}</span>
               </router-link>
             </div>
