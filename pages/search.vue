@@ -22,8 +22,10 @@ export default {
   components: {},
   computed: mapState(['checkObj']),
   watch: {
-    tags (checkObj) {
-      console.log(checkObj);
+    $route (to, from) {
+      if (JSON.stringify(to.query) != JSON.stringify(from.query)) {
+        this.getTags();
+      }
     }
   },
   data () {

@@ -100,23 +100,7 @@ export default {
   watch: {
     checkPosts (checkPosts) {
       if (checkPosts) {
-        let posts      = this.$store.getters.posts;
-        let timestamps = Object.keys(posts);
-
-        let count = 0;
-
-        timestamps.forEach((timestamp, index) => {
-          if (count >= this.recentSize) return true;
-
-          posts[timestamp].forEach((post) => {
-            if (count >= this.recentSize) return true;
-
-            this.recentPosts.push(post);
-            count++;
-          });
-        });
-
-        this.posts = posts;
+        this.setPosts();
       }
     },
     checkCommnets (checkCommnets) {
@@ -140,6 +124,28 @@ export default {
     }
   },
   methods: {
+    setPosts () {
+      let posts      = this.$store.getters.posts;
+      let timestamps = Object.keys(posts);
+
+      let count = 0;
+
+      timestamps.forEach((timestamp, index) => {
+        if (count >= this.recentSize) return true;
+
+        posts[timestamp].forEach((post) => {
+          if (count >= this.recentSize) return true;
+
+          this.recentPosts.push(post);
+          count++;
+        });
+      });
+
+      this.posts = posts;
+    }
+  },
+  beforeMount () {
+    this.setPosts();
   },
   mounted () {
   }
