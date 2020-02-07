@@ -24,15 +24,6 @@
 
                 <small class="text-light ml-auto">{{ post.timestamp }}</small>
               </router-link>
-
-              <!-- <a v-for="post in recentPosts" :href="post.path" class="d-flex w-100 footer-links">
-                <h6 class="text-theme1">
-                  <small><i class="fa fa-circle" aria-hidden="false"></i></small>
-                  <span class="text-truncate">{{ post.title }}</span>
-                </h6>
-
-                <small class="text-light ml-auto">{{ post.timestamp }}</small>
-              </a> -->
             </div>
           </card>
         </div>
@@ -71,7 +62,9 @@
             </div>
 
             <div v-else class="d-flex flex-wrap">
-              <a v-for="tag in tagKeys" :href="'/search?type=tags&key='+tag" class="ml-0 mr-1 mb-1 badge badge-pill badge-theme5">{{ tag }}</a>
+              <router-link v-for="tag in tagKeys" :to="'/search?type=tags&key='+tag" class="ml-0 mr-1 mb-1 badge badge-pill badge-theme5">
+                <span>{{ tag }}</span>
+              </router-link>
             </div>
           </card>
         </div>
