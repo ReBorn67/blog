@@ -5,9 +5,17 @@
     <main class="mt-4">
       <div class="container">
         <div class="row">
-          <component :class="['d-none', sideMenus.length ? 'd-lg-block' : '']" :is="sideMenusView" :menus="sideMenus"></component>
+          <component 
+            :class="[
+              'd-none', 
+              sideMenus.length && currentRoute.name !== 'search' ? 'd-lg-block' : ''
+            ]" 
+            :is="sideMenusView" 
+            :menus="sideMenus"
+          >
+          </component>
 
-          <fade-transition :class="['col ml-auto', sideMenus.length ? 'col-lg-9' : '']" origin="center" mode="out-in" :duration="250">
+          <fade-transition :class="['col ml-auto', sideMenus.length && currentRoute.name !== 'search' ? 'col-lg-9' : '']" origin="center" mode="out-in" :duration="250">
             <div id="content"><nuxt /></div>
           </fade-transition>
         </div>
@@ -38,7 +46,7 @@ export default {
     AppFloatButtons,
     FadeTransition
   },
-  computed: mapState(['sideMenus', 'checkObj', 'tags']),
+  computed: mapState(['sideMenus', 'checkObj']),
   watch: {
     sideMenus (sideMenus) {
       let AppLeftSide = () => import("./AppLeftSide");
@@ -46,7 +54,12 @@ export default {
       this.sideMenusView = AppLeftSide;
     },
     $route (to, from) {
-      if (
+      this.currentRoute = to;
+
+      if (to.name == 'search') {
+        this.$store.commit('setSideMenus', { title: '', subTree: [] });
+
+      } else if (
         typeof this.sideMenus[0] == 'undefined' || 
         this.sideMenus[0].title !== to.path.substring(1)
       ) {
@@ -57,6 +70,7 @@ export default {
   },
   data () {
     return {
+      currentRoute: this.$router.currentRoute,
       menus: {},
       sideMenusView: ''
     };

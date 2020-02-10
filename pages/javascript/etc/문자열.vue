@@ -214,7 +214,6 @@ export default {
   methods: {
   },
   beforeMount () {
-    // console.log(this.$options);
   }
 };
 </script>

@@ -1,10 +1,12 @@
 <template>
-    <div>
-        Hello World
-    </div>
+  <div>
+    Hello World
+  </div>
 </template>
 <script>
-export default {};
+export default {
+  name: 'OpenSSL'
+};
 </script>
 <style>
 </style>

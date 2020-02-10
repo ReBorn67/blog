@@ -6,7 +6,7 @@
           <card class="footer-block border-0" shadow body-classes="py-5">
             <div class="d-flex mb-4">
               <icon name="fa fa-list" type="theme1" rounded></icon>
-              <h6 class="text-theme1 text-uppercase mb-0 ml-4 align-self-center">Recent Posts</h6>
+              <h6 class="text-theme1 text-uppercase mb-0 ml-4 align-self-center">최근 포스트</h6>
             </div>
 
             <div v-if="!checkPosts" class="d-flex justify-content-center py-5">
@@ -16,7 +16,7 @@
             </div>
 
             <div v-else class="">
-              <router-link v-for="post in recentPosts" :key="post" :to="post.path" class="d-flex w-100 footer-links">
+              <router-link v-for="(post, index) in recentPosts" :key="index" :to="post.path" class="d-flex w-100 footer-links">
                 <h6 class="text-theme1">
                   <small><i class="fa fa-circle" aria-hidden="false"></i></small>
                   <span class="text-truncate">{{ post.title }}</span>
@@ -32,7 +32,7 @@
           <card class="footer-block border-0" shadow body-classes="py-5">
             <div class="d-flex mb-4">
               <icon name="fa fa-comments" type="theme3" rounded></icon>
-              <h6 class="text-theme3 text-uppercase mb-0 ml-4 align-self-center">Recent Comments</h6>
+              <h6 class="text-theme3 text-uppercase mb-0 ml-4 align-self-center">최근 댓글</h6>
             </div>
 
             <div>
@@ -52,7 +52,7 @@
           <card class="footer-block border-0" shadow body-classes="py-5">
             <div class="d-flex mb-4">
               <icon name="fa fa-tags" type="theme5" rounded></icon>
-              <h6 class="text-theme5 text-uppercase mb-0 ml-4 align-self-center">Tags</h6>
+              <h6 class="text-theme5 text-uppercase mb-0 ml-4 align-self-center">태그</h6>
             </div>
 
             <div v-if="!checkTags" class="d-flex justify-content-center py-5">
@@ -62,7 +62,12 @@
             </div>
 
             <div v-else class="d-flex flex-wrap">
-              <router-link v-for="tag in tagKeys" :key="tag" :to="'/search?type=tags&key='+tag" class="ml-0 mr-1 mb-1 badge badge-pill badge-theme5">
+              <router-link
+                v-for="tag in tagKeys" 
+                :key="tag" 
+                :to="'/search?type=tags&key='+tag" 
+                class="ml-0 mr-1 mb-1 badge badge-pill badge-theme5"
+              >
                 <span>{{ tag }}</span>
               </router-link>
             </div>
@@ -72,6 +77,35 @@
     </div>
 
     <div class="container bg-max-lg-light">
+      <div class="d-flex justify-content-center p-3 d-lg-none">
+        <div class="d-flex justify-content-center">
+          <div class="d-inline-block px-1 px-sm-2">
+            <router-link :to="'/search?type=posts'" class="small text-white">
+              <i class="fa fa-list align-middle" aria-hidden="true"></i>
+              <span class="align-middle">최근 포스트</span>
+            </router-link>
+          </div>
+
+          <div class="vertical-divider border-right mx-2"></div>
+
+          <div class="d-inline-block px-1 px-sm-2">
+            <router-link :to="'/search?type=comments'" class="small text-white">
+              <i class="fa fa-comments align-middle" aria-hidden="true"></i>
+              <span class="align-middle">최근 댓글</span>
+            </router-link>
+          </div>
+          
+          <div class="vertical-divider border-right mx-2"></div>
+
+          <div class="d-inline-block px-1 px-sm-2">
+            <router-link :to="'/search?type=tags'" class="small text-white">
+              <i class="fa fa-tags align-middle" aria-hidden="true"></i>
+              <span class="align-middle">태그</span>
+            </router-link>
+          </div>
+        </div>
+      </div>
+
       <div class="row align-items-center justify-content-md-between py-2 py-lg-4">
         <div class="col text-center">
           <div class="copyright">
@@ -161,6 +195,10 @@ export default {
 .footer-links {}
 .footer-links:hover {
   text-decoration: underline;
+}
+
+.vertical-divider {
+  font-size: 0;
 }
 
 @media (max-width: 991px) {

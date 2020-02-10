@@ -182,5 +182,13 @@ export const actions = {
     }
 
     return result;
+  },
+  getPCT ({ state, commit }, type, key) {
+    let result = {
+      check: state.checkObj[type],
+      datas: state[type]
+    }
+
+    return result;
   }
 };

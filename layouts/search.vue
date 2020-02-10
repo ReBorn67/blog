@@ -37,7 +37,18 @@ export default {
     FadeTransition
   },
   computed: mapState(['sideMenus', 'checkObj']),
+  transition: {
+    afterLeave(el) {
+      console.log('afterLeave', el)
+    }
+  },
   watch: {
+    $route (to, from) {
+      if (to.name != 'search') {
+        // this.$router.push({ path: to.path });
+        location.href = to.path;
+      }
+    }
   },
   data () {
     return {
@@ -156,6 +167,8 @@ export default {
     }
   },
   beforeCreate () {
+    console.log(this)
+    console.log(this.$router)
   },
   created () {
   },

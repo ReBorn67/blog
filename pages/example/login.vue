@@ -76,6 +76,7 @@
 </template>
 <script>
 export default {
+  name: 'login',
     data () {
         return {
             HOME_PATH: process.env.HOME_PATH
