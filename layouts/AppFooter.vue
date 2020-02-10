@@ -5,8 +5,10 @@
         <div class="col-md-4 mb-5 mb-md-0">
           <card class="footer-block border-0" shadow body-classes="py-5">
             <div class="d-flex mb-4">
-              <icon name="fa fa-list" type="theme1" rounded></icon>
-              <h6 class="text-theme1 text-uppercase mb-0 ml-4 align-self-center">최근 포스트</h6>
+              <icon name="fa fa-list" type="theme1" rounded to="/search?type=posts"></icon>
+              <h6 class="mb-0 ml-4 align-self-center">
+                <router-link :to="'/search?type=posts'" class="text-theme1">최근 포스트</router-link>
+              </h6>
             </div>
 
             <div v-if="!checkPosts" class="d-flex justify-content-center py-5">
@@ -31,8 +33,10 @@
         <div class="col-md-4 mb-5 mb-lg-0">
           <card class="footer-block border-0" shadow body-classes="py-5">
             <div class="d-flex mb-4">
-              <icon name="fa fa-comments" type="theme3" rounded></icon>
-              <h6 class="text-theme3 text-uppercase mb-0 ml-4 align-self-center">최근 댓글</h6>
+              <icon name="fa fa-comments" type="theme3" rounded to="/search?type=comments"></icon>
+              <h6 class="mb-0 ml-4 align-self-center">
+                <router-link :to="'/search?type=comments'" class="text-theme3">최근 댓글</router-link>
+              </h6>
             </div>
 
             <div>
@@ -51,8 +55,10 @@
         <div class="col-md-4 mb-5 mb-lg-0">
           <card class="footer-block border-0" shadow body-classes="py-5">
             <div class="d-flex mb-4">
-              <icon name="fa fa-tags" type="theme5" rounded></icon>
-              <h6 class="text-theme5 text-uppercase mb-0 ml-4 align-self-center">태그</h6>
+              <icon name="fa fa-tags" type="theme5" rounded to="/search?type=tags"></icon>
+              <h6 class="mb-0 ml-4 align-self-center">
+                <router-link :to="'/search?type=tags'" class="text-theme5">태그</router-link>
+              </h6>
             </div>
 
             <div v-if="!checkTags" class="d-flex justify-content-center py-5">

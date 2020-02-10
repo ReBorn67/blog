@@ -9,7 +9,8 @@
             color && `text-${color}`
          ]">
         <slot>
-            <i :class="name"></i>
+          <router-link v-if="to" :to="'/search?type=tags'" :class="['text-'+type]"><i :class="[name, 'align-middle']"></i></router-link>
+          <i v-else :class="name"></i>
         </slot>
     </div>
 </template>
@@ -51,6 +52,11 @@ export default {
       type: Boolean,
       default: false,
       description: "Whether icon is rounded"
+    },
+    to: {
+      type: String,
+      default: "",
+      description: "Route path"
     }
   }
 };
