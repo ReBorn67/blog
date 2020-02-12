@@ -6,7 +6,7 @@
   >
     <ul class="list-group">
       <div :id="'fake_collapse_'+menu.title+'_btn'">
-        <li :class="titleClass" @click.self.prevent="menuFolderEvent($event)">
+        <li :class="titleClass" @click="menuFolderEvent($event)">
           <i :class="['fa font-weight-bold align-middle m-0', isOpen ? 'fa-folder-open-o' : 'fa-folder-o']" aria-hidden="true"></i>
           <span>{{ setUpperTitle(menu.title) }}</span>
         </li>
@@ -39,10 +39,15 @@
           <tree-side-menus :menus="[item]" :sub="true" />
         </li>
 
-        <li v-for="(item, k) in linkMenus" :key="k" :menu="item" :class="linkItemClass + ' ml-2'" v-if="item.path">
-          <router-link to="" @click.native="menuLinkEvent(item.path)">
-            <span>{{ item.title }}</span>
-          </router-link>
+        <li
+          v-if="item.path"
+          v-for="(item, k) in linkMenus"
+          :key="k"
+          :menu="item"
+          :class="linkItemClass + ' ml-2'"
+          @click="menuLinkEvent(item.path)"
+        >
+          <span>{{ item.title }}</span>
         </li>
       </div>
     </ul>
@@ -100,7 +105,7 @@ export default {
       }
     },
     menuLinkEvent (path) {
-      this.$store.commit('setSideMenus', this.menu);
+      // this.$store.commit('setSideMenus', this.menu);
 
       this.$router.push({ path: path });
     },

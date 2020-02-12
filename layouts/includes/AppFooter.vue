@@ -64,7 +64,7 @@
             </div>
 
             <div v-if="!checkTags" class="d-flex justify-content-center py-5">
-              <div class="spinner-grow text-primary align-self-center" role="status">
+              <div class="spinner-grow text-theme5 align-self-center" role="status">
                 <span class="sr-only">Loading...</span>
               </div>
             </div>
