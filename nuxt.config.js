@@ -1,8 +1,8 @@
 const webpack = require('webpack');
-const path = require('path');
+const path    = require('path');
 
-const isDev = (process.env.NODE_ENV == 'development');
-const base_path = isDev ? '/' : '/blog/';
+const isDevelop = (process.env.NODE_ENV == 'development');
+const base_path = isDevelop ? '/' : '/blog/';
 
 const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
   router: {
@@ -43,8 +43,18 @@ export default {
    */
   // ...routerBase,
   base: base_path,
+  // router: {
+  //   base: base_path
+  // },
   router: {
-    base: base_path
+    scrollBehavior (to, from, savedPosition) {
+      return { x: 0, y: 0 }
+    },
+    extendRoutes (routes, resolve) {
+      // routes.forEach((route, index) => {
+      //   routes[index].title = 'test';
+      // });
+    }
   },
   env: {
     HOME_PATH: base_path

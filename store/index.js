@@ -1,13 +1,15 @@
 import deepmerge from 'deepmerge';
 
-// import login from './modules/login'
+import routesMeta from './routesMeta'
 
 export const modules = () => ({
-  // login
+  routesMeta
 });
 
 export const state = () => ({
+  menus: {},
   sideMenus: [],
+
   posts: {},
   commnets: {},
   tags: {},
@@ -20,6 +22,9 @@ export const state = () => ({
 });
 
 export const mutations = {
+  setMenus (state, menus) {
+    state.menus = menus;
+  },
   setCheckObj (state, options) {
     let key   = options.key;
     let value = options.value;
@@ -95,6 +100,13 @@ export const mutations = {
 };
 
 export const getters = {
+  menus (state) {
+    return state.menus;
+  },
+  sideMenus (state) {
+    return state.sideMenus;
+  },
+
   posts (state) {
     return state.posts;
   },
@@ -111,19 +123,38 @@ export const actions = {
     let componentsArr = {};
     let count = 0;
 
+    let routesMeta = state.routesMeta.metas;
+    // console.log(routesMeta)
+    // console.log(routesMeta['etc'])
+    // console.log(routesMeta['etc']['OpenSSL'])
+
     componentsArr = routes.filter((item) => { return item.path.match(/\//g).length > 1; });
 
     componentsArr.forEach(function (item, index) {
-      item.component().then((data) => {
-        data._id = item.component.name;
-        data.path = item.path;
+      let split = item.name.split('-');
 
+      let routeMeta = deepmerge([], routesMeta);
+
+      split.forEach(function(path, index) {
+        if (typeof routeMeta[path] !== 'undefined') {
+          routeMeta = routeMeta[path];
+        } else {
+          routeMeta = false;
+          return false;
+        }
+
+        if (index + 1 == split.length && typeof routeMeta.title === 'undefined') {
+          routeMeta = false;
+        }
+      });
+
+      if (routeMeta) {
         let object = {
           _id: item.component.name,
-          title: data.title,
+          title: routeMeta.title,
           path: item.path,
-          tags: data.tag,
-          timestamp: data.timestamp
+          tags: routeMeta.tags,
+          timestamp: routeMeta.timestamp
         };
 
         if (object.timestamp) {
@@ -133,48 +164,48 @@ export const actions = {
         if (object.tags) {
           commit('setTags', object);
         }
+      }
 
-        count++;
+      count++;
 
-        if (count == componentsArr.length) {
-          commit('setCheckObj', {key: 'posts', value: true});
-          // commit('setCheckObj', {key: 'commnets', value: true});
-          commit('setCheckObj', {key: 'tags', value: true});
-        }
-      });
+      if (count == componentsArr.length) {
+        commit('setCheckObj', {key: 'posts', value: true});
+        // commit('setCheckObj', {key: 'commnets', value: true});
+        commit('setCheckObj', {key: 'tags', value: true});
+      }
     });
   },
-  setTags ({ state, commit }, routes) {
-    let componentsArr = {};
-    let count = 0;
+  // setTags ({ state, commit }, routes) {
+  //   let componentsArr = {};
+  //   let count = 0;
 
-    componentsArr = routes.filter((item) => { return item.path.match(/\//g).length > 1; });
+  //   componentsArr = routes.filter((item) => { return item.path.match(/\//g).length > 1; });
 
-    componentsArr.forEach(function (item, index) {
-      item.component().then((data) => {
-        let object = {
-          _id: item.component.name,
-          title: data.title,
-          path: item.path,
-          tags: data.tag,
-          timestamp: data.timestamp
-        };
+  //   componentsArr.forEach(function (item, index) {
+  //     item.component().then((data) => {
+  //       let object = {
+  //         _id: item.component.name,
+  //         title: data.title,
+  //         path: item.path,
+  //         tags: data.tag,
+  //         timestamp: data.timestamp
+  //       };
 
-        if (data.tag) {
-          data._id = item.component.name;
-          data.path = item.path;
+  //       if (data.tag) {
+  //         data._id = item.component.name;
+  //         data.path = item.path;
 
-          commit('setTags', data);
-        }
+  //         commit('setTags', data);
+  //       }
 
-        count++;
+  //       count++;
 
-        if (count == componentsArr.length) {
-          commit('setCheckObj', {key: 'tags', value: true});
-        }
-      });
-    });
-  },
+  //       if (count == componentsArr.length) {
+  //         commit('setCheckObj', {key: 'tags', value: true});
+  //       }
+  //     });
+  //   });
+  // },
   getTags ({ state, commit }, key) {
     let result = {
       check: state.checkObj.tags,

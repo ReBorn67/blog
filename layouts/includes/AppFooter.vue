@@ -40,7 +40,9 @@
             </div>
 
             <div>
-              <a v-for="n in 6" href="#" class="d-flex w-100 footer-links">
+              <h1 style="font-size: 120px; text-align: center"><i class="ni ni-settings align-middle"></i></h1>
+
+              <a v-for="n in 0" href="#" class="d-flex w-100 footer-links">
                 <h6 class="text-theme3">
                   <small><i class="fa fa-circle" aria-hidden="false"></i></small>
                   <span class="text-truncate">recent comment {{ n }}</span>

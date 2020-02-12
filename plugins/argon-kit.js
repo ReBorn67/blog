@@ -8,7 +8,7 @@ import globalDirectives from "./globalDirectives";
 import VueLazyload from "vue-lazyload";
 
 if (process.browser) {
-    require('bootstrap');
+  require('bootstrap');
 }
 
 Vue.config.productionTip = false;

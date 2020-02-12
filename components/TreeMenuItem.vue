@@ -1,16 +1,35 @@
 <template>
   <base-dropdown 
-    tag="div" class="nav-item"
-    :class="[sub ? 'dropright sub-dropdown ml-2 ml-lg-0' : '']" 
+    :tag="subMenus.length ? 'div' : 'link'" class="nav-item"
+    :class="[
+      sub ? 'dropright sub-dropdown ml-2 ml-lg-0' : '',
+      !subMenus.length ? 'mr-lg-0 w-100' : ''
+    ]"
     @change="toggleMenu"
+    :hideArrow="false"
   >
-    <a 
+    <!-- <a 
       slot="title" href="#" role="button" 
       :class="[sub ? 'dropdown-item px-0 px-lg-3' : 'nav-link']"
     >
       <i :class="['fa font-weight-bold align-middle m-0 d-lg-none', isOpen ? 'fa-folder-open-o' : 'fa-folder-o']" aria-hidden="true"></i>
       <span class="nav-link-inner--text ml-1">{{ setUpperTitle(menu.title) }}</span>
-    </a>
+    </a> -->
+
+    <router-link 
+      slot="title"
+      :to="subMenus.length ? '#' : { name: 'list', query: { name: menu.title, parent: menu.parent }, params: { path: '', menu: menu }}"
+      :class="[sub ? 'dropdown-item px-0 px-lg-3' : 'nav-link']"
+    >
+      <i 
+        :class="[
+          'fa font-weight-bold align-middle m-0 d-lg-none', 
+          isOpen && subMenus.length ? 'fa-folder-open-o' : 'fa-folder-o'
+        ]"
+        aria-hidden="true"
+      ></i>
+      <span class="nav-link-inner--text ml-1">{{ setUpperTitle(menu.title) }}</span>
+    </router-link>
 
     <tree-menus v-for="(item, k) in subMenus" :key="item.title" :menus="[item]" :sub="true" />
 
@@ -46,8 +65,8 @@ export default {
   },
   data () {
     return {
-      linkMenus: this.menu['subTree'].filter((item, index) => { return item.path; }),
-      subMenus: this.menu['subTree'].filter((item, index) => { return !item.path; }),
+      linkMenus: this.menu['subTree'].filter((item, index) => { return !item.subTree; }),
+      subMenus: this.menu['subTree'].filter((item, index) => { return item.subTree; }),
       isOpen: false,
     }
   },

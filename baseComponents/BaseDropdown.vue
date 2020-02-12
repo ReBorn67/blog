@@ -1,31 +1,38 @@
 <template>
-    <component class=""
-               :is="tag"
-               :class="[{}, {'dropdown': direction === 'down'}, {'dropup': direction ==='up'}]"
-               aria-haspopup="true"
-               :aria-expanded="isOpen"
-               @click.stop="toggleDropDown"
-               :v-click-outside="closeDropDown">
+  <component 
+    class=""
+    :is="tag"
+    :class="[{}, {'dropdown': direction === 'down'}, {'dropup': direction ==='up'}]"
+    aria-haspopup="true"
+    :aria-expanded="isOpen"
+    @click.stop="toggleDropDown"
+    :v-click-outside="closeDropDown"
+  >
+    <slot name="title">
+      <a 
+        class="dropdown-toggle nav-link"
+        :class="{'no-caret': hideArrow}"
+        data-toggle="dropdown"
+      >
+        <i :class="icon"></i>
+        <span class="no-icon">{{title}}</span>
+      </a>
+    </slot>
 
-        <slot name="title">
-            <a class="dropdown-toggle nav-link"
-               :class="{'no-caret': hideArrow}"
-               data-toggle="dropdown">
-                <i :class="icon"></i>
-                <span class="no-icon">{{title}}</span>
-            </a>
-        </slot>
+    <div 
+      v-if="tag == 'div'" class="dropdown-menu"
+      :class="[{'dropdown-menu-right': position === 'right'}, {show: isOpen}, menuClasses]"
+    >
+      <slot></slot>
+    </div>
 
-        <div v-if="tag == 'div'" class="dropdown-menu"
-            :class="[{'dropdown-menu-right': position === 'right'}, {show: isOpen}, menuClasses]">
-            <slot></slot>
-        </div>
-
-        <ul v-else class="dropdown-menu"
-            :class="[{'dropdown-menu-right': position === 'right'}, {show: isOpen}, menuClasses]">
-            <slot></slot>
-        </ul>
-    </component>
+    <ul 
+      v-if="tag == 'ul'" class="dropdown-menu"
+      :class="[{'dropdown-menu-right': position === 'right'}, {show: isOpen}, menuClasses]"
+    >
+      <slot></slot>
+    </ul>
+  </component>
 </template>
 <script>
 export default {

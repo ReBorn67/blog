@@ -198,10 +198,6 @@ import Tabs from "~/components/Tabs/Tabs.vue";
 import TabPane from "~/components/Tabs/TabPane.vue";
 
 export default {
-  name: 'javascript-etc-string',
-  title: '문자열',
-  tag: 'Javascript,문자열,문자열검색,indexOf,lodash,정규식',
-  timestamp: '2020-02-04',
   components: {
     Tabs,
     TabPane

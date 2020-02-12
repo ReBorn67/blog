@@ -5,7 +5,14 @@
     <main class="mt-4">
       <div class="container">
         <div class="row">
-          <fade-transition class="col" origin="center" mode="out-in" :duration="250">
+          <component 
+            class="d-none d-lg-block" 
+            :is="sideMenusView" 
+            :menus="sideMenus"
+          >
+          </component>
+
+          <fade-transition :class="['col ml-auto', sideMenus.length && currentRoute.name !== 'search' ? 'col-lg-9' : '']" origin="center" mode="out-in" :duration="250">
             <div id="content"><nuxt /></div>
           </fade-transition>
         </div>
@@ -37,22 +44,32 @@ export default {
     FadeTransition
   },
   computed: mapState(['sideMenus', 'checkObj']),
-  transition: {
-    afterLeave(el) {
-      console.log('afterLeave', el)
-    }
-  },
   watch: {
+    sideMenus (sideMenus) {
+      let AppLeftSide = () => import("./includes/AppLeftSide");
+
+      this.sideMenusView = AppLeftSide;
+    },
     $route (to, from) {
-      // if (to.name != 'search') {
-      //   // this.$router.push({ path: to.path });
-      //   location.href = to.path;
-      // }
+      this.currentRoute = to;
+
+      if (to.name == 'search') {
+        this.$store.commit('setSideMenus', { title: '', subTree: [] });
+
+      } else if (
+        typeof this.sideMenus[0] == 'undefined' || 
+        this.sideMenus[0].title !== to.path.substring(1)
+      ) {
+        let sideMenus = this.setSideMenus(this.menus);
+        this.$store.commit('setSideMenus', sideMenus);
+      }
     }
   },
   data () {
     return {
+      currentRoute: this.$router.currentRoute,
       menus: {},
+      sideMenusView: ''
     };
   },
   methods: {
@@ -162,18 +179,52 @@ export default {
 
       return res.subTree;
     },
+    setSideMenus (menus) {
+      let path = this.$router.currentRoute.path;
+
+      if (path.substring(1) == '') {
+        return false;
+      }
+
+      let split = path.substring(1).split('/');
+      split.pop();
+
+      let clone = [deepmerge([], menus)];
+
+      let result = {
+        title: '',
+        subTree: false
+      }
+
+      split.forEach(function(title, index) {
+        clone[index].some((item, idx) => {
+          if (item.title == title) {
+            result.title = title;
+            clone.push(item.subTree);
+            return true;
+          }
+        });
+      });
+
+      result.subTree = clone.pop();
+
+      return result;
+    },
     setPCT () {
       this.$store.dispatch('setPCT', this.$router.options.routes);
     }
   },
   beforeCreate () {
-    console.log(this)
-    console.log(this.$router)
   },
   created () {
   },
   beforeMount () {
+    // if (this.$store.)
     this.menus = this.getMenus();
+
+    let sideMenus = this.setSideMenus(this.menus);
+    this.$store.commit('setSideMenus', sideMenus);
+    
     this.setPCT();
   },
   mounted () {
