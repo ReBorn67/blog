@@ -18,7 +18,7 @@
 
     <router-link 
       slot="title"
-      :to="subMenus.length ? '#' : { name: 'list', query: { parent: menu.parent, sub: menu.title }, params: { path: '', menu: menu }}"
+      :to="subMenus.length ? '#' : { name: 'list', query: { parent: menu.parent, sub: menu.title }}"
       :class="[sub ? 'dropdown-item px-0 px-lg-3' : 'nav-link']"
     >
       <i 
