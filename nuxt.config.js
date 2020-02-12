@@ -43,20 +43,20 @@ export default {
    */
   // ...routerBase,
   base: base_path,
-  // router: {
-  //   base: base_path
-  // },
   router: {
-    base: base_path,
-    scrollBehavior (to, from, savedPosition) {
-      return { x: 0, y: 0 }
-    },
-    extendRoutes (routes, resolve) {
-      // routes.forEach((route, index) => {
-      //   routes[index].title = 'test';
-      // });
-    }
+    base: base_path
   },
+  // router: {
+  //   base: base_path,
+  //   scrollBehavior (to, from, savedPosition) {
+  //     return { x: 0, y: 0 }
+  //   },
+  //   extendRoutes (routes, resolve) {
+  //     // routes.forEach((route, index) => {
+  //     //   routes[index].title = 'test';
+  //     // });
+  //   }
+  // },
   env: {
     HOME_PATH: base_path
   },
