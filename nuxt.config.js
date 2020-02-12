@@ -47,6 +47,7 @@ export default {
   //   base: base_path
   // },
   router: {
+    base: base_path,
     scrollBehavior (to, from, savedPosition) {
       return { x: 0, y: 0 }
     },
