@@ -239,12 +239,17 @@ export default {
         return false;
 
       } else if (path == 'list') {
-        let query = this.$route.query;
+        let query  = this.$route.query;
         let parent = query.parent;
+        let sub    = query.sub;
 
-        let res = menus.filter((menu) => { if (menu.title == parent) return menu; }).pop();
+        let result = menus.filter((menu) => { if (menu.title == parent) return menu; }).pop();
 
-        return res;
+        if (parent !== sub) {
+          result = result.subTree.filter((menu) => { if (menu.title == sub) return menu; }).pop();
+        }
+
+        return result;
       }
 
       let split = path.split('/');

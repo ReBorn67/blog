@@ -124,9 +124,6 @@ export const actions = {
     let count = 0;
 
     let routesMeta = state.routesMeta.metas;
-    // console.log(routesMeta)
-    // console.log(routesMeta['etc'])
-    // console.log(routesMeta['etc']['OpenSSL'])
 
     componentsArr = routes.filter((item) => { return item.path.match(/\//g).length > 1; });
 
@@ -175,37 +172,6 @@ export const actions = {
       }
     });
   },
-  // setTags ({ state, commit }, routes) {
-  //   let componentsArr = {};
-  //   let count = 0;
-
-  //   componentsArr = routes.filter((item) => { return item.path.match(/\//g).length > 1; });
-
-  //   componentsArr.forEach(function (item, index) {
-  //     item.component().then((data) => {
-  //       let object = {
-  //         _id: item.component.name,
-  //         title: data.title,
-  //         path: item.path,
-  //         tags: data.tag,
-  //         timestamp: data.timestamp
-  //       };
-
-  //       if (data.tag) {
-  //         data._id = item.component.name;
-  //         data.path = item.path;
-
-  //         commit('setTags', data);
-  //       }
-
-  //       count++;
-
-  //       if (count == componentsArr.length) {
-  //         commit('setCheckObj', {key: 'tags', value: true});
-  //       }
-  //     });
-  //   });
-  // },
   getTags ({ state, commit }, key) {
     let result = {
       check: state.checkObj.tags,
