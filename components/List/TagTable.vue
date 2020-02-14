@@ -1,5 +1,5 @@
 <template>
-  <div id="listTable">
+  <div id="tagTable" class="shadow">
     <table class="table table-sm table-hover my-4">
       <thead class="bg-theme3 text-white">
         <tr>
@@ -45,7 +45,7 @@
 
 <script>
 export default {
-  name: 'list-table',
+  name: 'tag-table',
   components: {
   },
   props: {
@@ -55,7 +55,6 @@ export default {
     }
   },
   data () {
-    console.log(123)
     return {};
   },
   methods: {

@@ -46,14 +46,14 @@ export const mutations = {
       }
     }
   },
-  setPosts (state, object) {
-    let timestamp = object.timestamp;
+  setPosts (state, oriObject) {
+    let timestamp = oriObject.timestamp;
 
     if (typeof state.posts[timestamp] == 'undefined') {
       state.posts[timestamp] = [];
     }
 
-    state.posts[timestamp].push(object);
+    state.posts[timestamp].push(oriObject);
 
     /* 중복제거 */
     let tmp = [];
@@ -77,15 +77,15 @@ export const mutations = {
 
     state.posts = tmpPosts;
   },
-  setTags (state, object) {
-    let tags = object.tags.split(',');
+  setTags (state, oriObject) {
+    let tags = oriObject.tags.split(',');
 
     tags.map(function (tag) {
       if (typeof state.tags[tag] == 'undefined') {
         state.tags[tag] = [];
       }
 
-      state.tags[tag].push(object);
+      state.tags[tag].push(oriObject);
 
       /* 중복제거 */
       let tmp = [];
@@ -99,6 +99,21 @@ export const mutations = {
 
         return array;
       }, []);
+      // console.log(state.tags[tag])
+
+      /* 정렬 */
+      let tmpTags = {};
+
+      // state.tags[tag].map((object) => {
+      //   console.log(object.timestamp);
+      // });
+
+      // tagKeys.sort((a, b) => { return Date.parse(b) - Date.parse(a); });
+      // tagKeys.map((key, index) => { tmpTags[key] = state.tags[tag][key]; });
+      // console.log(tmpTags);
+      // console.log('-------------------')
+
+      // state.tags[tag] = tmpTags;
     });
   }
 };

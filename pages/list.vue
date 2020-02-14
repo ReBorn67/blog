@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div id="pageHeader" class="section-shaped my-0">
+    <div id="pageHeader" class="section-shaped my-0 shadow">
       <div class="shape shape-style-1 shape-primary">
         <span v-for="n in 10" :key="n" :class="'span-'+randomNumber(15, true)+'0'"></span>
       </div>
@@ -9,60 +9,17 @@
         <div class="col px-0">
           <div class="row justify-content-center align-items-center">
             <div class="col text-center pt-lg">
-              <h1 class="text-white">{{ parent }}</h1>
-              <p class="lead text-white mt-4 mb-5">{{ parent != sub ? '['+sub+']' : '&nbsp;' }}</p>
+              <h1 class="text-white">{{ setUpperTitle(parent) }}</h1>
+              <p class="lead text-white mt-4 mb-5">{{ parent != sub ? '['+setUpperTitle(sub)+']' : '&nbsp;' }}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- <component :is="tableView" :list="list"></component> -->
+    <component :is="tableView" :list="list"></component>
 
-    <div id="listTable">
-      <table class="table table-sm table-hover my-4">
-        <thead class="bg-theme3 text-white">
-          <tr>
-            <th scope="col" class="text-center">#</th>
-            <th scope="col">Title</th>
-            <th scope="col" class="text-center">date</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr v-for="(item, index) in list" :key="index">
-            <th scope="row" class="align-middle text-center">{{ item.index + 1 }}</th>
-            <td>
-              <h6 class="font-weight-bold">
-                <router-link
-                  class="text-dark"
-                  :to="item.path" 
-                >
-                  <span>{{ item.title }}</span>
-                </router-link>
-              </h6>
-
-              <small class="blockquote-footer text-theme2">
-                <i class="fa fa-tags" aria-hidden="true"></i>
-
-                <router-link
-                  v-for="(tag, tagIndex) in item.tags.split(',')" 
-                  :key="tag" 
-                  :to="'/search?type=tags&key='+tag" 
-                  class="text-theme2 font-italic"
-                >
-                  <span v-if="tagIndex == item.tags.split(',').length - 1">{{ tag }}</span>
-                  <span v-else>{{ tag }}, </span>
-                </router-link>
-              </small>
-            </td>
-            <td class="align-middle text-center">{{ item.timestamp }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <component :is="paginationView" :pagiObject="pagiObject" :parent="parent" :sub="sub"></component>
+    <component :is="paginationView" :pagiObject="pagiObject" :path="'list'" :listParent="parent" :listSub="sub"></component>
   </div>
 </template>
 
@@ -70,7 +27,7 @@
 import { mapState } from 'vuex';
 
 export default {
-  computed: mapState(['menus', 'sideMenus', 'routesMeta']),
+  computed: mapState(['sideMenus', 'routesMeta', 'pageSize', 'pageLeftSize', 'pageRightSize']),
   watch: {
     $route (to, from) {
       this.parent = this.sideMenus[0].parent;
@@ -80,15 +37,17 @@ export default {
       this.listObject = this.createListObject();
       this.pagiObject = this.createPagingObject(this.listObject);
 
-      if (this.pagiObject.currentPage > this.pagiObject.totalPage) {
-        this.$router.push({ name: 'list', query: { parent: this.parent, sub: this.sub, page: 1 }});
-      }
+      // if (this.pagiObject.currentPage > this.pagiObject.totalPage) {
+      //   this.$router.replace({ name: 'list', query: { parent: this.parent, sub: this.sub, page: 1 }});
+      // }
 
       this.list = this.listObject.currentList;
     },
     pagiObject (pagiObject) {
-      let paginationView = () => import("~/components/Pagination");
+      let tableView      = () => import("~/components/List/ListTable");
+      let paginationView = () => import("~/components/List/Pagination");
 
+      this.tableView      = tableView;
       this.paginationView = paginationView;
     }
   },
@@ -99,14 +58,13 @@ export default {
 
       parent: '',
       sub: '',
+
       listObject: {},
       pagiObject: {},
       list: [],
       page: this.$route.query.page ? this.$route.query.page : 1,
-      pageSize: this.$store.state.pageSize,
-      pageLeftSize: this.$store.state.pageLeftSize,
-      pageRightSize: this.$store.state.pageRightSize,
 
+      tableView: '',
       paginationView: ''
     };
   },
@@ -115,6 +73,15 @@ export default {
       let number = Math.floor(Math.random() * size);
       if (!toZero) number++;
       return number;
+    },
+    setUpperTitle (text) {
+      let check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+
+      if (check.test(text.charAt(0)) || text == 'etc') return text;
+
+      if (text == 'php') return text.toUpperCase();
+
+      return text.charAt(0).toUpperCase() + text.slice(1);
     },
     getTS (date) {
       if (date) return new Date(date).getTime();
@@ -166,7 +133,7 @@ export default {
         totalCount: oriMenus.length,
         totalPage: Math.ceil(oriMenus.length / this.pageSize),
         currentPage: this.page*1,
-        pageSize: this.pageSize,
+        pageSize: this.pageSize*1,
         currentList: subMenus,
         totalList: oriMenus
       };
@@ -215,6 +182,9 @@ export default {
     }
   },
   beforeCreate () {
+    // if (!this.$route.query.parent || !this.$route.query.sub) {
+    //   this.$router.replace('/');
+    // }
   },
   beforeMount () {
     this.parent = this.sideMenus[0].parent;
@@ -223,9 +193,9 @@ export default {
     this.listObject = this.createListObject();
     this.pagiObject = this.createPagingObject(this.listObject);
 
-    if (this.pagiObject.currentPage > this.pagiObject.totalPage) {
-      this.$router.push({ name: 'list', query: { parent: this.parent, sub: this.sub, page: 1 }});
-    }
+    // if (this.pagiObject.currentPage > this.pagiObject.totalPage) {
+    //   this.$router.replace({ name: 'list', query: { parent: this.parent, sub: this.sub, page: 1 }});
+    // }
 
     this.list = this.listObject.currentList;
   }
