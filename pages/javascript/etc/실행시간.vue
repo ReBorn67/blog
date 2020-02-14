@@ -18,8 +18,8 @@
         <div class="col px-0">
           <div class="row justify-content-center align-items-center">
             <div class="col text-center pt-lg">
-              <h1 class="text-white">문자열</h1>
-              <p class="lead text-white mt-4 mb-5">[찾기, 자르기, 바꾸기]</p>
+              <h1 class="text-white">실행시간</h1>
+              <p class="lead text-white mt-4 mb-5">[자바스크립트 실행시간 측정]</p>
             </div>
           </div>
         </div>

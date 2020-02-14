@@ -18,7 +18,11 @@ export const state = () => ({
     posts: false,
     commnets: false,
     tags: false
-  }
+  },
+
+  pageSize: 15,
+  pageLeftSize: 2,
+  pageRightSize: 2,
 });
 
 export const mutations = {
