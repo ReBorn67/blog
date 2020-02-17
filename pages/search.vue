@@ -63,7 +63,7 @@
       </div>
     </div>
 
-    <component v-if="type" :is="tableView" :list="list"></component>
+    <component v-if="type && list.length" :is="tableView" :list="list"></component>
 
     <component :is="paginationView" :pagiObject="pagiObject" :path="'search'" :searchType="type" :searchKey="key"></component>
   </div>
