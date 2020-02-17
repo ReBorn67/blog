@@ -37,7 +37,7 @@
           v-for="pageNum in pagiObject.endIndex" 
           class="page-item"
         >
-          <span v-if="pageNum == pagiObject.currentPage" class="page-link shadow">{{ pageNum }}</span>
+          <span v-if="pageNum == pagiObject.currentPage" class="page-link shadow bg-theme2 text-white">{{ pageNum }}</span>
 
           <router-link
             v-else
