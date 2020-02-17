@@ -18,8 +18,9 @@
 
     <router-link 
       slot="title"
-      :to="subMenus.length ? '#' : { name: 'list', query: { parent: menu.parent, sub: menu.title }}"
+      to=""
       :class="[sub ? 'dropdown-item px-0 px-lg-3' : 'nav-link']"
+      @click.native="menuListLinkEvent(subMenus.length ? '#' : menu)"
     >
       <i 
         :class="[
@@ -73,6 +74,15 @@ export default {
   methods: {
     toggleMenu (isOpen) {
       this.isOpen = isOpen;
+    },
+    menuListLinkEvent (menu) {
+      if (typeof menu === 'object') {
+        if ($('#header .collapse.navbar-collapse').hasClass('show')) {
+          $('#mobile-menu-close').click();
+        }
+
+        this.$router.push({ name: 'list', query: { parent: menu.parent, sub: menu.title }});
+      }
     },
     menuLinkEvent (path) {
       if ($('#header .collapse.navbar-collapse').hasClass('show')) {

@@ -37,10 +37,6 @@ export default {
       this.listObject = this.createListObject();
       this.pagiObject = this.createPagingObject(this.listObject);
 
-      // if (this.pagiObject.currentPage > this.pagiObject.totalPage) {
-      //   this.$router.replace({ name: 'list', query: { parent: this.parent, sub: this.sub, page: 1 }});
-      // }
-
       this.list = this.listObject.currentList;
     },
     pagiObject (pagiObject) {
@@ -183,9 +179,6 @@ export default {
     }
   },
   beforeCreate () {
-    // if (!this.$route.query.parent || !this.$route.query.sub) {
-    //   this.$router.replace('/');
-    // }
   },
   beforeMount () {
     this.parent = this.sideMenus[0].parent;
@@ -193,10 +186,6 @@ export default {
 
     this.listObject = this.createListObject();
     this.pagiObject = this.createPagingObject(this.listObject);
-
-    // if (this.pagiObject.currentPage > this.pagiObject.totalPage) {
-    //   this.$router.replace({ name: 'list', query: { parent: this.parent, sub: this.sub, page: 1 }});
-    // }
 
     this.list = this.listObject.currentList;
   }

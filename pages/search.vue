@@ -63,50 +63,6 @@
       </div>
     </div>
 
-    <!-- view table after select tag -->
-    <div v-if="false" id="tagTable" class="shadow">
-      <table class="table table-sm table-hover my-4">
-        <thead class="bg-theme3 text-white">
-          <tr>
-            <th scope="col" class="text-center">#</th>
-            <th scope="col">Title</th>
-            <th scope="col" class="text-center">date</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr v-for="(item, index) in data[type]" :key="index">
-            <th scope="row" class="align-middle text-center">{{ item.index + 1 }}</th>
-            <td>
-              <h6 class="font-weight-bold">
-                <router-link
-                  class="text-dark"
-                  :to="item.path" 
-                >
-                  <span>{{ item.title }}</span>
-                </router-link>
-              </h6>
-
-              <small class="blockquote-footer text-theme2">
-                <i class="fa fa-tags" aria-hidden="true"></i>
-
-                <router-link
-                  v-for="(tag, tagIndex) in item.tags.split(',')" 
-                  :key="tag" 
-                  :to="'/search?type=tags&key='+tag" 
-                  class="text-theme2 font-italic"
-                >
-                  <span v-if="tagIndex == item.tags.split(',').length - 1">{{ tag }}</span>
-                  <span v-else>{{ tag }}, </span>
-                </router-link>
-              </small>
-            </td>
-            <td class="align-middle text-center">{{ item.timestamp }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
     <component v-if="type" :is="tableView" :list="list"></component>
 
     <component :is="paginationView" :pagiObject="pagiObject" :path="'search'" :searchType="type" :searchKey="key"></component>
@@ -235,12 +191,6 @@ export default {
       if (oriList['index'])     delete oriList['index'];
       if (oriList['listIndex']) delete oriList['listIndex'];
 
-      // if (this.parent == this.sub) {
-      //   metas = this.routesMeta.metas[this.parent];
-      // } else {
-      //   metas = this.routesMeta.metas[this.parent][this.sub];
-      // }
-
       /* sort DESC */
       let sortList = Object.values(oriList).sort(function (a, b) { 
         let a_TS = self.getTS(a.timestamp);
@@ -249,8 +199,6 @@ export default {
       });
 
       /* set list */
-      // let subListTitle = oriList.map((menu) => { return menu.title });
-
       subList = sortList.map((object, index) => {
         object['index']     = index;
         object['listIndex'] = sortList.length - index;
