@@ -231,7 +231,7 @@ export default {
       return classArr.join(' ');
     }
   },
-  mounted() {
+  mounted () {
     this.$nextTick(() => {
       if (this.value) {
         this.findAndActivateTab(this.value);

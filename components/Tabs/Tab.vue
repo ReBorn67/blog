@@ -27,7 +27,7 @@ export default {
       active: false
     };
   },
-  mounted() {
+  mounted () {
     this.addTab(this);
   },
   destroyed() {

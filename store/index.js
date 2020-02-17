@@ -20,7 +20,7 @@ export const state = () => ({
     tags: false
   },
 
-  pageSize: 15,
+  pageSize: 10,
   pageLeftSize: 2,
   pageRightSize: 2,
 });

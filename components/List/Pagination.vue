@@ -11,7 +11,7 @@
           <router-link
             v-else
             class="page-link shadow"
-            :to="{ name: path, query: Object.assign(query, { page: 1 })}"
+            :to="{ name: path, query: getQuery(1)}"
           >
             <span><i class="fa fa-angle-double-left" aria-hidden="true"></i></span>
           </router-link>
@@ -24,7 +24,7 @@
           <router-link
             v-else
             class="page-link shadow"
-            :to="{ name: path, query: Object.assign(query, { page: pagiObject.currentPage - 1 })}"
+            :to="{ name: path, query: getQuery(pagiObject.currentPage - 1)}"
           >
             <span><i class="fa fa-angle-left" aria-hidden="true"></i></span>
           </router-link>
@@ -42,17 +42,10 @@
           <router-link
             v-else
             class="page-link shadow"
-            :to="{ name: path, query: Object.assign(query, { page: pageNum })}"
+            :to="{ name: path, query: getQuery(pageNum)}"
           >
             <span>{{ pageNum }}</span>
           </router-link>
-          <!-- <router-link
-            v-else
-            class="page-link shadow"
-            :to="{ name: path, query: { parent: parent, sub: sub, page: pageNum }}"
-          >
-            <span>{{ pageNum }}</span>
-          </router-link> -->
         </li>
 
         <!-- right arrow -->
@@ -65,7 +58,7 @@
           <router-link
             v-else
             class="page-link shadow"
-            :to="{ name: path, query: Object.assign(query, { page: pagiObject.currentPage + 1 })}"
+            :to="{ name: path, query: getQuery(pagiObject.currentPage + 1)}"
           >
             <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
           </router-link>
@@ -78,7 +71,7 @@
           <router-link
             v-else
             class="page-link shadow"
-            :to="{ name: path, query: Object.assign(query, { page: pagiObject.totalPage })}"
+            :to="{ name: path, query: getQuery(pagiObject.totalPage)}"
           >
             <span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
           </router-link>
@@ -121,7 +114,7 @@ export default {
     };
   },
   methods: {
-    setQuery () {
+    getQuery (pageNum) {
       let query = {};
 
       if (this.listParent) query['parent'] = this.listParent;
@@ -129,11 +122,12 @@ export default {
       if (this.searchType) query['type']   = this.searchType;
       if (this.searchKey)  query['key']    = this.searchKey;
 
+      query['page'] = pageNum;
+
       return query;
     }
   },
   beforeMount () {
-    this.query = this.setQuery();
   },
   mounted () {
   },

@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div id="search">
     <div id="pageHeader" class="section-shaped my-0 shadow">
       <div class="shape shape-style-1 shape-primary">
         <span v-for="n in 10" :key="n" :class="'span-'+randomNumber(15, true)+'0'"></span>
@@ -9,11 +9,34 @@
         <div class="col px-0">
           <div class="row justify-content-center align-items-center">
             <div class="col text-center pt-lg">
-              <h1 class="text-white">{{ type ? setUpperTitle(type) : 'Search' }}</h1>
+              <h1 class="text-white">{{ type ? getKorTitle(type) : 'Search' }}</h1>
               <p class="lead text-white mt-4 mb-5">{{ key ? '['+setUpperTitle(key)+']' : '&nbsp;' }}</p>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div id="postsWrap" class="my-4">
+      <div class="d-flex mb-4">
+        <icon name="fa fa-list" type="theme1" rounded to="/search?type=posts"></icon>
+        <h6 class="mb-0 ml-4 align-self-center">
+          <router-link :to="'/search?type=posts'" class="text-theme1">최근 포스트</router-link>
+        </h6>
+      </div>
+
+      <div class="d-flex flex-wrap">
+        <router-link
+          v-for="(array, timestamp) in posts" 
+          :key="timestamp" 
+          :to="'/search?type=posts&key='+timestamp" 
+          class="ml-0 mr-1 mb-1 badge badge-pill"
+          :class="[
+            timestamp == key ? 'badge-danger' : 'badge-theme1'
+          ]"
+        >
+          <span>{{ timestamp }} ({{ array.length }})</span>
+        </router-link>
       </div>
     </div>
 
@@ -30,7 +53,10 @@
           v-for="(item, tag) in tags" 
           :key="tag" 
           :to="'/search?type=tags&key='+tag" 
-          class="ml-0 mr-1 mb-1 badge badge-pill badge-theme5"
+          class="ml-0 mr-1 mb-1 badge badge-pill"
+          :class="[
+            tag == key ? 'badge-danger' : 'badge-theme5'
+          ]"
         >
           <span>{{ tag }}</span>
         </router-link>
@@ -81,7 +107,7 @@
       </table>
     </div>
 
-    <component :is="tableView" :list="list"></component>
+    <component v-if="type" :is="tableView" :list="list"></component>
 
     <component :is="paginationView" :pagiObject="pagiObject" :path="'search'" :searchType="type" :searchKey="key"></component>
   </div>
@@ -90,12 +116,16 @@
 <script>
 import { mapState } from 'vuex';
 
+import Prism from "prismjs";
+import 'prismjs/themes/prism-tomorrow.css';
+
 export default {
   computed: mapState(['sideMenus', 'routesMeta', 'pageSize', 'pageLeftSize', 'pageRightSize']),
   watch: {
     $route (to, from) {
       this.type = to.query.type;
       this.key  = to.query.key;
+      this.page = to.query.page ? to.query.page : 1;
 
       if (!to.query.type) return;
 
@@ -103,11 +133,8 @@ export default {
         this.getPCT(this.type, this.key);
       }
     },
-    data (data) {
-      console.log(data);
-    },
     pagiObject (pagiObject) {
-      let tableView      = () => import("~/components/List/TagTable");
+      let tableView      = () => import("~/components/List/ListTable");
       let paginationView = () => import("~/components/List/Pagination");
 
       this.tableView      = tableView;
@@ -152,6 +179,13 @@ export default {
       let start = new Date().getTime();
       while (new Date().getTime() < start + delay);
     },
+    getKorTitle (title) {
+      if (title == 'posts') {
+        return '최근 포스트';
+      } else if (title == 'tags') {
+        return '태그';
+      }
+    },
     setUpperTitle (text) {
       let check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
 
@@ -187,8 +221,8 @@ export default {
 
           this.list = this.listObject.currentList;
 
-          console.log(this.listObject)
-          console.log(this.pagiObject)
+          // console.log(this.listObject)
+          // console.log(this.pagiObject)
         }
       });
     },
@@ -197,6 +231,9 @@ export default {
       let oriList = this.data[type];
       let subList = false;
       // let metas    = false;
+      
+      if (oriList['index'])     delete oriList['index'];
+      if (oriList['listIndex']) delete oriList['listIndex'];
 
       // if (this.parent == this.sub) {
       //   metas = this.routesMeta.metas[this.parent];
@@ -215,7 +252,8 @@ export default {
       // let subListTitle = oriList.map((menu) => { return menu.title });
 
       subList = sortList.map((object, index) => {
-        object['index'] = index;
+        object['index']     = index;
+        object['listIndex'] = sortList.length - index;
 
         return object;
       });
@@ -284,6 +322,9 @@ export default {
   beforeCreate () {
   },
   beforeMount () {
+    // const code = `var data = 1;`;
+    // this.html = Prism.highlight(code, Prism.languages.javascript, 'javascript');
+
     let query = this.$route.query;
 
     if (query.type) {

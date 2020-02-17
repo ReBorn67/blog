@@ -20,7 +20,7 @@ export default {
   mounted() {
     this.addTab(this);
   },
-  destroyed() {
+  destroyed () {
     if (this.$el && this.$el.parentNode) {
       this.$el.parentNode.removeChild(this.$el);
     }

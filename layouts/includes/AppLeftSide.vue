@@ -24,6 +24,11 @@ export default {
       type: Array
     }
   },
+  watch: {
+    $route (to, from) {
+      this.marginTop = window.scrollY;
+    }
+  },
   data () {
     return {
       HOME_PATH: process.env.HOME_PATH,

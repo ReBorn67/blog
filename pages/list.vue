@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div id="list">
     <div id="pageHeader" class="section-shaped my-0 shadow">
       <div class="shape shape-style-1 shape-primary">
         <span v-for="n in 10" :key="n" :class="'span-'+randomNumber(15, true)+'0'"></span>
@@ -114,6 +114,7 @@ export default {
         let menu         = oriMenus[subMenuIndex];
 
         menu['index']     = index;
+        menu['listIndex'] = sortMetasObj.length - index;
         menu['tags']      = obj.tags;
         menu['timestamp'] = obj.timestamp;
 

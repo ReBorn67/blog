@@ -52,6 +52,28 @@
     }
 }
 
+
+//
+// Alternate buttons
+//
+
+@each $color, $value in $theme-colors {
+  .btn-#{$color} {
+    @include button-variant($value, $value);
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .btn-outline-#{$color} {
+    @include button-outline-variant($value);
+  }
+}
+
+
+//
+// Link buttons
+//
+
 .btn-link {
     font-weight: $btn-font-weight;
     box-shadow: none;
@@ -60,6 +82,19 @@
         box-shadow: none;
         transform: none;
     }
+}
+
+@each $color, $value in $theme-colors {
+  .btn-link-#{$color} {
+    color: $value;
+
+    @include hover {
+      color: map-get($theme-colors, $color + '-d');
+      text-decoration: $link-hover-decoration;
+      background-color: transparent;
+      border-color: transparent;
+    }
+  }
 }
 
 .btn-neutral {
