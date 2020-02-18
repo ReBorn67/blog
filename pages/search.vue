@@ -72,9 +72,6 @@
 <script>
 import { mapState } from 'vuex';
 
-import Prism from "prismjs";
-import 'prismjs/themes/prism-tomorrow.css';
-
 export default {
   computed: mapState(['sideMenus', 'routesMeta', 'pageSize', 'pageLeftSize', 'pageRightSize']),
   watch: {
@@ -270,9 +267,6 @@ export default {
   beforeCreate () {
   },
   beforeMount () {
-    // const code = `var data = 1;`;
-    // this.html = Prism.highlight(code, Prism.languages.javascript, 'javascript');
-
     let query = this.$route.query;
 
     if (query.type) {
