@@ -81,9 +81,7 @@ import Tabs from "~/components/Tabs/Tabs.vue";
 import TabPane from "~/components/Tabs/TabPane.vue";
 
 import Prism from "prismjs";
-import loadLanguages from "prismjs/components/index.js";
 import PrismBash from "prismjs/components/prism-bash.js";
-loadLanguages(['bash.js']);
 
 import 'prismjs/plugins/command-line/prism-command-line.js';
 import 'prismjs/plugins/command-line/prism-command-line.css';
