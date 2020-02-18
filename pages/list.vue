@@ -181,13 +181,18 @@ export default {
   beforeCreate () {
   },
   beforeMount () {
-    this.parent = this.sideMenus[0].parent;
-    this.sub    = this.sideMenus[0].title;
+    if (this.sideMenus.length) {
+      this.parent = this.sideMenus[0].parent;
+      this.sub    = this.sideMenus[0].title;
 
-    this.listObject = this.createListObject();
-    this.pagiObject = this.createPagingObject(this.listObject);
+      this.listObject = this.createListObject();
+      this.pagiObject = this.createPagingObject(this.listObject);
 
-    this.list = this.listObject.currentList;
+      this.list = this.listObject.currentList;
+
+    } else {
+      this.$router.push('/');
+    }
   }
 };
 </script>

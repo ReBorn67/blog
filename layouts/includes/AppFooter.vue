@@ -97,7 +97,8 @@
           <div class="vertical-divider border-right mx-2"></div>
 
           <div class="d-inline-block px-1 px-sm-2">
-            <router-link :to="'/search?type=comments'" class="small text-white">
+            <router-link to="#" class="small text-white">
+            <!-- <router-link :to="'/search?type=comments'" class="small text-white"> -->
               <i class="fa fa-comments align-middle" aria-hidden="true"></i>
               <span class="align-middle">최근 댓글</span>
             </router-link>

@@ -9,7 +9,7 @@
         <div class="col px-0">
           <div class="row justify-content-center align-items-center">
             <div class="col text-center pt-lg">
-              <h1 class="text-white">{{ type ? getKorTitle(type) : 'Search' }}</h1>
+              <h1 class="text-white">{{ type ? getKorTitle(type) : '검색' }}</h1>
               <p class="lead text-white mt-4 mb-5">{{ key ? '['+setUpperTitle(key)+']' : '&nbsp;' }}</p>
             </div>
           </div>
@@ -63,9 +63,9 @@
       </div>
     </div>
 
-    <component v-if="type && list.length" :is="tableView" :list="list"></component>
+    <component v-if="type && key && list.length" :is="tableView" :list="list"></component>
 
-    <component :is="paginationView" :pagiObject="pagiObject" :path="'search'" :searchType="type" :searchKey="key"></component>
+    <component v-if="type && key && list.length" :is="paginationView" :pagiObject="pagiObject" :path="'search'" :searchType="type" :searchKey="key"></component>
   </div>
 </template>
 
